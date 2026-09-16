@@ -53,7 +53,7 @@
 
   <sc-if value="{{ splashOn }}" hint-placeholder-val="{{ true }}">
     <div data-no-wiggle="" style="{{ splashStyle }}">
-      <div style="position:absolute;inset:0;overflow:hidden"><img src="assets/deck-2-lowsun.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panC 26s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
+      <div style="position:absolute;inset:0;overflow:hidden"><img src="assets/deck-1-daylight.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panC 26s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(18,17,16,.78) 0%, rgba(18,17,16,.62) 45%, rgba(18,17,16,.8) 100%)"></div>
       <div style="position:relative;width:100%;max-width:480px;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-6)">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 64px)/19.8);letter-spacing:.02em;white-space:nowrap;text-transform:uppercase;color:#fff">
@@ -66,8 +66,9 @@
 
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           <div style="position:relative;height:56px">
-            <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.28)"></div>
-            <div style="{{ trailA }}"></div>
+            <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:12px;border-radius:999px;background:rgba(255,255,255,.13);overflow:hidden">
+              <div style="{{ trailA }}"></div>
+            </div>
             <div style="{{ laneA }}">
               <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(-9deg)">
                 <img src="assets/trev.jpg" alt="Trev" style="width:100%;height:100%;object-fit:cover">
@@ -75,8 +76,9 @@
             </div>
           </div>
           <div style="position:relative;height:56px">
-            <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.28)"></div>
-            <div style="{{ trailB }}"></div>
+            <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:12px;border-radius:999px;background:rgba(255,255,255,.13);overflow:hidden">
+              <div style="{{ trailB }}"></div>
+            </div>
             <div style="{{ laneB }}">
               <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(9deg)">
                 <img src="assets/andre.jpg" alt="André" style="width:100%;height:100%;object-fit:cover">
@@ -96,13 +98,12 @@
   <div data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
     <div ref="{{ stackRef }}" data-no-wiggle="" style="position:absolute;inset:-6% -4%;will-change:transform">
       <div style="{{ l1 }}"><video src="assets/hero-drone.mp4" poster="assets/deck-1-daylight.jpeg" data-slide="0" autoPlay="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="auto" style="width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l2 }}"><img src="assets/deck-1-daylight.jpeg" alt="The roof deck in full daylight, the bay and Alcatraz beyond the rail" style="width:100%;height:100%;object-fit:cover;animation:panA 15s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
-      <div style="{{ l3 }}"><video src="assets/hero-blueangels.mp4" poster="assets/deck-1-daylight.jpeg" data-slide="2" muted="{{ true }}" playsInline="{{ true }}" preload="auto" style="width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l4 }}"><img src="assets/deck-2-lowsun.jpeg" alt="Late afternoon sun raking across the empty deck" style="width:100%;height:100%;object-fit:cover;animation:panB 18s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
-      <div style="{{ l5 }}"><img src="assets/deck-5-party.jpeg" alt="Friends talking on the deck as the city lights come on" style="width:100%;height:100%;object-fit:cover;animation:panC 14s cubic-bezier(.37,0,.63,1) -11s infinite alternate"></div>
-      <div style="{{ l6 }}"><img src="assets/deck-3-skyline.jpeg" alt="Downtown San Francisco going blue at dusk" style="width:100%;height:100%;object-fit:cover;animation:panD 20s cubic-bezier(.37,0,.63,1) -16s infinite alternate"></div>
-      <div style="{{ l7 }}"><img src="assets/deck-7-dusk.jpeg" alt="Friends at the rail as the city lights come up" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;animation:panB 17s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
-      <div style="{{ l8 }}"><img src="assets/deck-4-sunset.jpeg" alt="A wide fiery sunset over the Golden Gate from the roof" style="width:100%;height:100%;object-fit:cover;animation:panE 16s cubic-bezier(.37,0,.63,1) -21s infinite alternate"></div>
+      <div style="{{ l2 }}"><video src="assets/hero-blueangels.mp4" poster="assets/deck-1-daylight.jpeg" data-slide="1" muted="{{ true }}" playsInline="{{ true }}" preload="auto" style="width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l3 }}"><img src="assets/deck-2-lowsun.jpeg" alt="Late afternoon sun raking across the empty deck" style="width:100%;height:100%;object-fit:cover;animation:panB 18s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
+      <div style="{{ l4 }}"><img src="assets/deck-5-party.jpeg" alt="Friends talking on the deck as the city lights come on" style="width:100%;height:100%;object-fit:cover;animation:panC 14s cubic-bezier(.37,0,.63,1) -11s infinite alternate"></div>
+      <div style="{{ l5 }}"><img src="assets/deck-3-skyline.jpeg" alt="Downtown San Francisco going blue at dusk" style="width:100%;height:100%;object-fit:cover;animation:panD 20s cubic-bezier(.37,0,.63,1) -16s infinite alternate"></div>
+      <div style="{{ l6 }}"><img src="assets/deck-7-dusk.jpeg" alt="Friends at the rail as the city lights come up" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;animation:panB 17s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
+      <div style="{{ l7 }}"><img src="assets/deck-4-sunset.jpeg" alt="A wide fiery sunset over the Golden Gate from the roof" style="width:100%;height:100%;object-fit:cover;animation:panE 16s cubic-bezier(.37,0,.63,1) -21s infinite alternate"></div>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #FAF9F500, #FAF9F500, #FAF9F500, #FAF9F500); pointer-events: none"></div>
 
@@ -241,18 +242,13 @@
           <h3 style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;text-transform:uppercase">On the roof</h3>
           <span style="margin-left:auto;font-family:'Bungee',sans-serif;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--color-accent-700)">{{ countLine }}</span>
         </div>
-        <sc-if value="{{ emptyList }}">
-          <p style="margin:0;font-size:14px;color:var(--color-neutral-600)">No replies yet. Be the first name on the list.</p>
+        <div style="display:flex;align-items:flex-end;gap:var(--space-4);border-top:1px solid var(--color-divider);padding-top:var(--space-4)">
+          <span style="font-family:'Rubik Spray Paint',sans-serif;font-size:64px;line-height:.82;color:var(--color-accent-400)">{{ headCount }}</span>
+          <p style="margin:0 0 6px;flex:1;min-width:0;font-size:14px;line-height:1.45;text-wrap:pretty">{{ tallyLine }}</p>
+        </div>
+        <sc-if value="{{ sendFailed }}">
+          <p style="margin:var(--space-3) 0 0;font-size:12.5px;line-height:1.45;color:var(--color-accent-700)">Your reply is saved on this phone but didn't reach the list — tell André directly.</p>
         </sc-if>
-        <sc-for list="{{ entries }}" as="e" hint-placeholder-count="0">
-          <div style="display:flex;align-items:baseline;gap:var(--space-3);padding:var(--space-3) 0;border-top:1px solid var(--color-divider);animation:rise .6s both">
-            <div style="flex:1;min-width:0">
-              <p style="margin:0;font-size:15px;font-weight:600">{{ e.name }}</p>
-              <p style="margin:2px 0 0;font-size:12px;line-height:1.4;color:var(--color-neutral-600)">{{ e.detail }}</p>
-            </div>
-            <span style="{{ e.tagStyle }}">{{ e.statusLabel }}</span>
-          </div>
-        </sc-for>
       </div>
     </sc-if>
 
@@ -290,7 +286,7 @@
   </div>
 
   <div style="position:relative;overflow:hidden;background:var(--color-neutral-900);color:var(--color-bg);padding:var(--space-8) var(--space-4) calc(var(--space-8) + 72px)">
-    <div data-no-wiggle="" style="position:absolute;inset:0"><img src="assets/deck-4-sunset.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panA 24s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
+    <div data-no-wiggle="" style="position:absolute;inset:0"><img src="assets/deck-6-djs.jpg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panA 24s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(18,17,16,.55) 0%, rgba(18,17,16,.72) 100%);pointer-events:none"></div>
     <div style="position:relative;margin:0 auto">
       <h2 data-reveal="" style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(38px,12vw,64px);line-height:.98;text-transform:uppercase">See you<br>on the roof</h2>
@@ -339,9 +335,11 @@ const PARTY = {
   start: '2026-10-09T13:00:00',
   end: '2026-10-09T20:00:00',
   slideSeconds: 4,
+  // Paste the Google Apps Script web-app URL here (ends in /exec).
+  // Empty string = RSVPs save on the guest's own phone only.
+  sheetUrl: '',
   captions: [
     'Coming in over the roof',
-    'The deck, full daylight — Alcatraz off the rail',
     'Blue Angels over the bay',
     'Late sun, long shadows, nobody here yet',
     'Last October, right as the lights came on',
@@ -352,7 +350,7 @@ const PARTY = {
 };
 
 class Component extends DCLogic {
-  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', rsvps: [], mine: null, editing: false, error: '', shared: false };
+  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
   stackRef = React.createRef();
   titleRef = React.createRef();
   bandRef = React.createRef();
@@ -366,13 +364,23 @@ class Component extends DCLogic {
       const raw = localStorage.getItem(this.key);
       if (raw) { const d = JSON.parse(raw); this.setState({ rsvps: d.rsvps || [], mine: d.mine || null }); }
     } catch (e) {}
+    this.fetchTally();
+    this.tallyTimer = setInterval(() => this.fetchTally(), 45000);
 
     // Splash race — the two headshots run while the hero clip buffers.
     // Each racer gets its own pace and a slow sine wobble, so the run reads
     // as two things moving rather than two numbers ticking.
     this.a = 0; this.b = 0; this.videoReady = false;
     this.raceStart = performance.now();
-    const racer = () => ({ dur: 5200 + Math.random() * 1600, ph: Math.random() * 6.28, w: 0.5 + Math.random() * 0.45 });
+    const racer = () => ({
+      dur: 4200 + Math.random() * 3600,          // wide spread: one can finish well ahead
+      ph: Math.random() * 6.28,
+      w: 0.45 + Math.random() * 0.9,             // wobble rate
+      amp: 0.05 + Math.random() * 0.075,         // wobble depth
+      surgeAt: 0.2 + Math.random() * 0.5,        // when it kicks
+      surge: 0.06 + Math.random() * 0.16,        // how hard
+      stall: Math.random() < 0.55 ? 0.3 + Math.random() * 0.4 : -1
+    });
     this.rA = racer(); this.rB = racer();
     document.querySelectorAll('video').forEach(v => { v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute('muted',''); v.setAttribute('playsinline',''); });
     const vid = document.querySelector('video');
@@ -380,15 +388,19 @@ class Component extends DCLogic {
       if (vid.readyState >= 3) this.videoReady = true;
       else vid.addEventListener('canplaythrough', () => { this.videoReady = true; }, { once: true });
     } else { this.videoReady = true; }
+    const bump = (t, at, amt, width) => amt * Math.exp(-Math.pow((t - at) / width, 2));
     const curve = (rr, elapsed) => {
       const t = Math.min(1, elapsed / rr.dur);
-      const base = 1 - Math.pow(1 - t, 1.85);           // smooth ease-out
-      const wob = Math.sin(elapsed / 1000 * rr.w * 2 + rr.ph) * 0.045 * (1 - t);
-      return Math.max(0, Math.min(1, base + wob)) * 100;
+      const base = 1 - Math.pow(1 - t, 1.85);                        // smooth ease-out
+      const wob = Math.sin(elapsed / 1000 * rr.w * 2 + rr.ph) * rr.amp * (1 - t);
+      const surge = bump(t, rr.surgeAt, rr.surge, 0.13);             // a burst of speed
+      const stall = rr.stall > 0 ? -bump(t, rr.stall, rr.surge * 0.8, 0.1) : 0;
+      return Math.max(0, Math.min(1, base + wob + surge + stall)) * 100;
     };
     const tick = () => {
       if (this.state.splashGone) return;
       const elapsed = performance.now() - this.raceStart;
+      this.raceClock = elapsed;
       const open = (this.videoReady && elapsed > 4200) || elapsed > 8000;
       const cap = open ? 100 : 86;
       // glide toward the curve, and drift into the cap instead of clipping at it
@@ -517,6 +529,7 @@ class Component extends DCLogic {
   componentWillUnmount() {
     clearInterval(this.timer);
     clearTimeout(this.fallback);
+    clearInterval(this.tallyTimer);
     cancelAnimationFrame(this.raceRaf);
     cancelAnimationFrame(this.raf);
     window.removeEventListener('scroll', this.onScroll);
@@ -554,6 +567,28 @@ class Component extends DCLogic {
     try { localStorage.setItem(this.key, JSON.stringify({ rsvps, mine })); } catch (e) {}
   }
 
+  get endpoint() { return (this.props.sheetUrl ?? PARTY.sheetUrl) || ''; }
+
+  // Read the running tally back off the sheet. Counts only — no names.
+  fetchTally() {
+    if (!this.endpoint) return;
+    fetch(this.endpoint + '?v=' + Date.now())
+      .then(res => res.json())
+      .then(d => { if (d && typeof d.heads === 'number') this.setState({ tally: d, sending: false }); })
+      .catch(() => {});
+  }
+
+  // Send one RSVP to the sheet. text/plain keeps it a simple request, so
+  // Apps Script answers without a CORS preflight.
+  sendToSheet(entry) {
+    if (!this.endpoint) return;
+    this.setState({ sending: true });
+    fetch(this.endpoint, { method: 'POST', body: JSON.stringify(entry), headers: { 'Content-Type': 'text/plain;charset=utf-8' } })
+      .then(res => res.json())
+      .then(d => { if (d && typeof d.heads === 'number') this.setState({ tally: d }); this.setState({ sending: false }); })
+      .catch(() => this.setState({ sending: false, sendFailed: true }));
+  }
+
   ics() {
     const z = t => t.replace(/[-:]/g, '');
     const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Edith Street Roof//EN', 'BEGIN:VEVENT',
@@ -573,6 +608,9 @@ class Component extends DCLogic {
     const yes = rsvps.filter(r => r.status === 'yes');
     const heads = yes.reduce((n, r) => n + 1 + (r.guests || 0), 0);
     const maybe = rsvps.filter(r => r.status === 'maybe').length;
+    // The sheet is the source of truth once it answers; fall back to this device.
+    const tHeads = this.state.tally ? this.state.tally.heads : heads;
+    const tMaybe = this.state.tally ? (this.state.tally.maybe || 0) : maybe;
     const order = { yes: 0, maybe: 1, no: 2 };
     const label = { yes: 'Yes', maybe: 'Maybe', no: "Can't" };
     const layer = n => 'position:absolute;inset:0;overflow:hidden;transition:opacity 1500ms cubic-bezier(.4,0,.2,1);opacity:' +
@@ -584,20 +622,34 @@ class Component extends DCLogic {
 
     const { loading, splashGone, pa, pb, winner } = this.state;
     // driven every frame, so no CSS transition — a transition here fights the rAF updates
-    const lane = p => 'position:absolute;top:50%;left:' + p.toFixed(2) + '%;transform:translate(-50%,-50%);will-change:left';
+    const now = this.raceClock || 0;
+    const trail = p => 'height:100%;border-radius:999px;background:linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-400) 100%);width:' + Math.max(4, p).toFixed(1) + '%';
+    // bob + squash: the heads bounce along the pill rather than sliding flat
+    const lane = (p, ph, outcome) => {
+      const bob = Math.sin(now / 1000 * 5.2 + ph) * 7;
+      const sq = 1 + Math.sin(now / 1000 * 5.2 + ph) * 0.05;
+      const base = 'position:absolute;top:50%;left:' + p.toFixed(2) + '%;will-change:left,transform;';
+      // The winner blows up over the whole splash; the other one shrinks back.
+      if (outcome === 'win') return base + 'z-index:3;transform:translate(-50%,-50%) scale(5.4);' +
+        'transition:transform 1.05s cubic-bezier(.16,1.02,.3,1)';
+      if (outcome === 'lose') return base + 'z-index:1;opacity:.35;transform:translate(-50%,-50%) scale(.72);' +
+        'transition:transform .9s cubic-bezier(.22,.7,.2,1), opacity .9s ease';
+      return base + 'transform:translate(-50%,-50%) translateY(' + bob.toFixed(2) + 'px) scale(' +
+        (1 / sq).toFixed(3) + ',' + sq.toFixed(3) + ')';
+    };
 
     return {
       splashOn: !splashGone,
-      splashStyle: 'position:fixed;inset:0;z-index:60;background:var(--color-neutral-900);display:flex;align-items:center;justify-content:center;opacity:' +
-        (loading ? 1 : 0) + ';transition:opacity .7s cubic-bezier(.22,.7,.2,1);pointer-events:' + (loading ? 'auto' : 'none'),
+      splashStyle: 'position:fixed;inset:0;z-index:60;overflow:hidden;background:var(--color-neutral-900);display:flex;align-items:center;justify-content:center;opacity:' +
+        (loading ? 1 : 0) + ';transition:opacity .85s .25s cubic-bezier(.22,.7,.2,1);pointer-events:' + (loading ? 'auto' : 'none'),
       pctLabel: Math.round(Math.min(pa, pb)) + '%',
-      laneA: lane(6 + pa * 0.88),
-      laneB: lane(6 + pb * 0.88),
-      trailA: 'position:absolute;left:0;top:50%;height:2px;margin-top:-1px;background:var(--color-accent-400);width:' + Math.max(6, pa).toFixed(1) + '%',
-      trailB: 'position:absolute;left:0;top:50%;height:2px;margin-top:-1px;background:var(--color-accent-400);width:' + Math.max(6, pb).toFixed(1) + '%',
+      laneA: lane(6 + pa * 0.88, this.rA ? this.rA.ph : 0, winner ? (winner === 'Trev' ? 'win' : 'lose') : null),
+      laneB: lane(6 + pb * 0.88, this.rB ? this.rB.ph : 2.1, winner ? (winner === 'André' ? 'win' : 'lose') : null),
+      trailA: trail(pa),
+      trailB: trail(pb),
       raceLine: winner ? (winner === 'Trev' ? 'Trev takes it' : 'André takes it') : 'Hold tight',
       stackRef: this.stackRef, titleRef: this.titleRef, bandRef: this.bandRef, barRef: this.barRef,
-      l1: layer(0), l2: layer(1), l3: layer(2), l4: layer(3), l5: layer(4), l6: layer(5), l7: layer(6), l8: layer(7),
+      l1: layer(0), l2: layer(1), l3: layer(2), l4: layer(3), l5: layer(4), l6: layer(5), l7: layer(6),
       onTouchStart: e => { const t = e.touches[0]; this.tx = t.clientX; this.ty = t.clientY; },
       onTouchEnd: e => {
         const t = e.changedTouches[0];
@@ -629,7 +681,7 @@ class Component extends DCLogic {
       inc: () => this.setState(s => ({ guests: Math.min(4, s.guests + 1) })),
       dec: () => this.setState(s => ({ guests: Math.max(0, s.guests - 1) })),
       guestLabel: this.state.guests === 0 ? 'Just me' : '+' + this.state.guests + (this.state.guests === 1 ? ' guest' : ' guests'),
-      hasError: !!error, error,
+      hasError: !!error, error, sendFailed: this.state.sendFailed,
       submit: () => {
         const n = this.state.name.trim();
         if (n.length < 2) { this.setState({ error: 'A name, please — even a first name.' }); return; }
@@ -637,6 +689,7 @@ class Component extends DCLogic {
         const rest = (mine ? rsvps.filter(r => r.at !== mine.at) : rsvps);
         this.persist([...rest, entry], entry);
         this.setState({ editing: false, error: '' });
+        this.sendToSheet(entry);
       },
       editMine: () => this.setState({ editing: true, name: mine ? mine.name : '', status: mine ? mine.status : 'yes', guests: mine ? mine.guests : 0, bring: mine ? mine.bring : '' }),
       mineStatusLabel: mine ? (mine.status === 'yes' ? "You're on the list" : mine.status === 'maybe' ? 'Pencilled in' : 'Next time') : '',
@@ -645,8 +698,12 @@ class Component extends DCLogic {
         : mine.name + (mine.guests ? ' + ' + mine.guests : '') + ' · Friday, October 9 at 1 PM' + (mine.bring ? ' · bringing ' + mine.bring : '')) : '',
 
       showList,
-      emptyList: rsvps.length === 0,
-      countLine: heads + ' coming' + (maybe ? ' · ' + maybe + ' maybe' : ''),
+      emptyList: tHeads === 0 && tMaybe === 0,
+      countLine: this.state.sending ? 'Sending…' : (tHeads + ' coming' + (tMaybe ? ' · ' + tMaybe + ' maybe' : '')),
+      tallyLine: tHeads === 0 && tMaybe === 0
+        ? 'No replies yet. Be the first.'
+        : tHeads + (tHeads === 1 ? ' person' : ' people') + ' on the roof so far' + (tMaybe ? ', ' + tMaybe + ' still deciding' : '') + '.',
+      headCount: String(tHeads),
       entries: [...rsvps].sort((a, b) => (order[a.status] - order[b.status]) || a.at - b.at).map(r => ({
         name: r.name + (r.guests ? ' + ' + r.guests : ''),
         detail: r.bring ? 'Bringing ' + r.bring : (r.status === 'yes' ? 'Replied yes' : r.status === 'maybe' ? 'Might make it' : 'Out this time'),
