@@ -11,25 +11,33 @@
   <link rel="stylesheet" href="ds/modernist/styles.css">
   <script src="ds/modernist/ds_bundle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Happy Birthday Trev — André's roof deck, Oct 9</title>
+  <title>Trev's 40th Birthday — André's roof deck, Oct 9</title>
   <meta name="description" content="Fleet Weekend on the roof. Friday, October 9, 2026, 1 PM till sunset. 40 Edith Street #4, San Francisco. RSVP here.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Happy Birthday Trev">
+  <meta property="og:title" content="Trev's 40th Birthday">
   <meta property="og:description" content="André's roof deck · Fleet Weekend · Friday, October 9, 2026 · 1 PM till sunset. RSVP here.">
   <meta property="og:url" content="https://mango-mushroom.github.io/TrevsBirthday/">
   <meta property="og:image" content="https://mango-mushroom.github.io/TrevsBirthday/og-preview-2.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Happy Birthday Trev">
+  <meta name="twitter:title" content="Trev's 40th Birthday">
   <meta name="twitter:description" content="André's roof deck · Fleet Weekend · Oct 9, 2026 · 1 PM till sunset">
   <meta name="twitter:image" content="https://mango-mushroom.github.io/TrevsBirthday/og-preview-2.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&amp;family=Bungee:wght@400&amp;family=Archivo:wght@400;500;600;800&amp;display=swap">
   <style>
     body { margin: 0; background: var(--color-neutral-900); overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
-    a { color: var(--color-accent-700); }
-    a:hover { color: var(--color-accent); }
+    a { color: var(--color-accent-400); }
+    a:hover { color: var(--color-accent-300); }
+    /* the system's states paint the base red — peach everywhere instead */
+    .btn-primary { background: var(--color-accent-400); border-color: var(--color-accent-400); color: var(--color-neutral-900); }
+    .btn-primary:hover { background: var(--color-accent-300); border-color: var(--color-accent-300); }
+    .btn-primary:active { background: var(--color-accent-500); border-color: var(--color-accent-500); }
+    .seg-opt:has(input:checked) { background: var(--color-accent-400); color: var(--color-neutral-900); }
+    .input:focus, .input:focus-visible { border-color: var(--color-accent-400); outline-color: var(--color-accent-400); }
+    :focus-visible { outline-color: var(--color-accent-400); }
+    ::selection { background: var(--color-accent-200); }
     @keyframes panA { from { transform: scale(1.22) translate3d(-7%, 3%, 0); } to { transform: scale(1.4) translate3d(6%, -4%, 0); } }
     @keyframes panB { from { transform: scale(1.38) translate3d(7%, 4.5%, 0); } to { transform: scale(1.2) translate3d(-6.5%, -3%, 0); } }
     @keyframes panC { from { transform: scale(1.18) translate3d(1%, 7%, 0); } to { transform: scale(1.45) translate3d(-2%, -7%, 0); } }
@@ -45,7 +53,10 @@
       100% { transform: none; }
     }
     @keyframes bob { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(7px); opacity: 1; } }
+    @keyframes breathe { 0%, 100% { transform: scale(1); opacity: .82; } 50% { transform: scale(1.055); opacity: 1; } }
     @keyframes sweep { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes flow { from { background-position: 0 50%; } to { background-position: 260px 50%; } }
+    @keyframes fizz { from { background-position: 0 0, 0 0; } to { background-position: -150px 0, 96px 0; } }
   </style>
 </helmet>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="#ec3013"></rect><text x="34" y="52" font-family="Archivo, sans-serif" font-size="20" font-weight="800" fill="#f3f2f2">TREV</text><rect x="34" y="60" width="52" height="5" fill="#f3f2f2"></rect><text x="34" y="82" font-family="Archivo, sans-serif" font-size="11" font-weight="800" fill="#f3f2f2">OCT 9</text></svg></template>
@@ -53,43 +64,42 @@
 
   <sc-if value="{{ splashOn }}" hint-placeholder-val="{{ true }}">
     <div data-no-wiggle="" style="{{ splashStyle }}">
-      <div style="position:absolute;inset:0;overflow:hidden"><img src="assets/deck-1-daylight.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panC 26s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(18,17,16,.78) 0%, rgba(18,17,16,.62) 45%, rgba(18,17,16,.8) 100%)"></div>
+      <div style="position:absolute;inset:0;overflow:hidden;background:#3f7fb4 url('assets/splash-frame.jpg') center 26%/cover no-repeat"><video src="assets/hero-blueangels.mp4?v=2" poster="assets/splash-frame.jpg" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" style="width:100%;height:100%;object-fit:cover;object-position:50% 26%"></video></div>
       <div style="position:relative;width:100%;max-width:480px;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-6)">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 64px)/19.8);letter-spacing:.02em;white-space:nowrap;text-transform:uppercase;color:#fff">
+        <div style="display:flex;justify-content:center;align-items:center;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 40px)/17.2);letter-spacing:.01em;white-space:nowrap;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 2px rgba(18,17,16,.9);-webkit-text-stroke:0.6px rgba(18,17,16,.95);paint-order:stroke fill">
           <span style="color:var(--color-accent-400);flex:none">/</span>
           <span style="flex:1;text-align:center">{{ pctLabel }}</span>
           <span style="color:var(--color-accent-400);flex:none">/</span>
         </div>
         <div style="height:1px;background:rgba(255,255,255,.4);margin-top:calc(var(--space-4) * -1);transform-origin:left;animation:sweep 1s .2s both cubic-bezier(.22,.7,.2,1)"></div>
-        <h2 style="margin:0;text-align:center;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 480px) - 156px) / 10.6);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-shadow:0 1px 2px rgba(18,17,16,.95), 0 2px 9px rgba(18,17,16,.8);-webkit-text-stroke:0.9px rgba(18,17,16,.5);paint-order:stroke fill"><span style="color:var(--color-accent-400)">Trev's</span> Birthday<br>Fleet Weekend<br><span style="color:var(--color-accent-400)">Andre's</span> Roof Deck</h2>
+        <h2 style="margin:0;text-align:center;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 480px) - 44px) / 12.1);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 1px rgba(18,17,16,.85), 0 3px 14px rgba(18,17,16,.45);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision"><span style="color:var(--color-accent-400)">Trev's</span> 40th Birthday<br>Fleet Weekend<br><span style="color:var(--color-accent-400)">Andre's</span> Roof Deck</h2>
 
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           <div style="position:relative;height:56px">
-            <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:12px;border-radius:999px;background:rgba(255,255,255,.13);overflow:hidden">
+            <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:16px;border-radius:999px;background:rgba(255,255,255,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.35), inset 0 -1px 0 rgba(255,255,255,.12);overflow:hidden">
               <div style="{{ trailA }}"></div>
             </div>
             <div style="{{ laneA }}">
-              <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(-9deg)">
-                <img src="assets/trev.jpg" alt="Trev" style="width:100%;height:100%;object-fit:cover">
+              <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(-9deg)">
+                <img src="assets/trev.jpg" alt="Trev" style="width:100%;height:100%;object-fit:cover;transform:translate(.3px,-.5px)">
               </div>
             </div>
           </div>
           <div style="position:relative;height:56px">
-            <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:12px;border-radius:999px;background:rgba(255,255,255,.13);overflow:hidden">
+            <div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:16px;border-radius:999px;background:rgba(255,255,255,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.35), inset 0 -1px 0 rgba(255,255,255,.12);overflow:hidden">
               <div style="{{ trailB }}"></div>
             </div>
             <div style="{{ laneB }}">
-              <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(9deg)">
-                <img src="assets/andre.jpg" alt="André" style="width:100%;height:100%;object-fit:cover">
+              <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(9deg)">
+                <img src="assets/andre.jpg" alt="André" style="width:100%;height:100%;object-fit:cover;object-position:41% 14%;transform:scale(1.16) translate(1.1px,1.9px)">
               </div>
             </div>
           </div>
         </div>
 
-        <div style="display:flex;align-items:baseline;gap:var(--space-3);font-family:'Bungee',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55)">
-          <span>Loading the roof</span>
-          <span style="margin-left:auto;color:var(--color-accent-400)">{{ raceLine }}</span>
+        <div style="display:flex;align-items:baseline;gap:var(--space-3);font-family:'Bungee',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 2px rgba(18,17,16,.9);-webkit-text-stroke:0.6px rgba(18,17,16,.95);paint-order:stroke fill">
+          <span>Loading the party</span>
+          <span style="margin-left:auto;color:var(--color-accent-300)">{{ raceLine }}</span>
         </div>
       </div>
     </div>
@@ -97,21 +107,43 @@
 
   <div data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
     <div ref="{{ stackRef }}" data-no-wiggle="" style="position:absolute;inset:-6% -4%;will-change:transform">
-      <div style="{{ l1 }}"><video src="assets/hero-drone.mp4" poster="assets/deck-1-daylight.jpeg" data-slide="0" autoPlay="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" preload="auto" style="width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l2 }}"><video src="assets/hero-blueangels.mp4" poster="assets/deck-1-daylight.jpeg" data-slide="1" muted="{{ true }}" playsInline="{{ true }}" preload="auto" style="width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l3 }}"><img src="assets/deck-2-lowsun.jpeg" alt="Late afternoon sun raking across the empty deck" style="width:100%;height:100%;object-fit:cover;animation:panB 18s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
-      <div style="{{ l4 }}"><img src="assets/deck-5-party.jpeg" alt="Friends talking on the deck as the city lights come on" style="width:100%;height:100%;object-fit:cover;animation:panC 14s cubic-bezier(.37,0,.63,1) -11s infinite alternate"></div>
-      <div style="{{ l5 }}"><img src="assets/deck-3-skyline.jpeg" alt="Downtown San Francisco going blue at dusk" style="width:100%;height:100%;object-fit:cover;animation:panD 20s cubic-bezier(.37,0,.63,1) -16s infinite alternate"></div>
-      <div style="{{ l6 }}"><img src="assets/deck-7-dusk.jpeg" alt="Friends at the rail as the city lights come up" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;animation:panB 17s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
-      <div style="{{ l7 }}"><img src="assets/deck-4-sunset.jpeg" alt="A wide fiery sunset over the Golden Gate from the roof" style="width:100%;height:100%;object-fit:cover;animation:panE 16s cubic-bezier(.37,0,.63,1) -21s infinite alternate"></div>
+      <div style="{{ l5 }}"><div style="position:absolute;inset:0;z-index:0;animation:panA 22s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/windows-frame.jpg') center/cover no-repeat"></div><video data-src="assets/hero-windows.mp4?v=2" data-start="0.14" data-slide="4" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l2 }}"><div style="position:absolute;inset:0;z-index:0;animation:panB 19s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/splash-frame.jpg') center/cover no-repeat"></div><video data-src="assets/hero-blueangels.mp4?v=2" data-start="0.14" data-slide="1" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l3 }}"><div style="position:absolute;inset:0;z-index:0;animation:panC 17s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/dk-frame.jpg') center/cover no-repeat"></div><video data-src="assets/hero-dk.mp4?v=4" data-start="0" data-min="8" data-slide="2" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l1 }}"><div style="position:absolute;inset:0;z-index:0;animation:panE 18s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/deck-1-daylight.jpeg') center/cover no-repeat"></div><video data-src="assets/hero-drone.mp4?v=11" data-slide="0" data-start="0.14" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l4 }}"><div style="position:absolute;inset:0;z-index:0;animation:panD 20s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/deck-7-dusk.jpeg') center/cover no-repeat"></div><video data-src="assets/hero-deck.mp4?v=2" data-start="0.14" data-slide="3" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #FAF9F500, #FAF9F500, #FAF9F500, #FAF9F500); pointer-events: none"></div>
+    <audio ref="{{ trackRef }}" src="assets/party-track.mp3" loop="{{ true }}" preload="auto"></audio>
+    <sc-if value="{{ showPlay }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ tapToPlay }}" aria-label="Play the roof" style="{{ playBtn }}">
+        <span style="display:grid;place-items:center;width:132px;height:132px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:rgba(18,17,16,.22);backdrop-filter:blur(3px);box-shadow:0 10px 40px rgba(0,0,0,.35);animation:breathe 3.4s ease-in-out infinite">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="rgba(255,255,255,.92)" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+        </span>
+        <span style="font-family:'Bungee',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 6px rgba(18,17,16,.8)">Tap to play</span>
+      </button>
+    </sc-if>
+    <button type="button" onClick="{{ toggleSound }}" aria-label="{{ soundLabel }}" style="{{ soundBtn }}">
+      <sc-if value="{{ soundOn }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 5 6 9H2v6h4l5 4V5z"></path>
+          <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+          <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+        </svg>
+      </sc-if>
+      <sc-if value="{{ soundOff }}" hint-placeholder-val="{{ true }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 5 6 9H2v6h4l5 4V5z"></path>
+          <line x1="22" y1="9" x2="16" y2="15"></line>
+          <line x1="16" y1="9" x2="22" y2="15"></line>
+        </svg>
+      </sc-if>
+    </button>
+    <div style="{{ creditStyle }}">Hubbabubbaklubb — Mopedbart</div>
 
     <div style="position:absolute;top:0;left:0;right:0;padding:var(--space-4) var(--space-4) var(--space-3);pointer-events:none">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 64px)/19.8);letter-spacing:.02em;white-space:nowrap;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(18,17,16,.75);animation:rise .9s .1s both">
-        <span style="color:var(--color-accent-400);flex:none">/</span>
-        <span style="flex:1;text-align:center">Friday October 9th, 2026 @ 1PM</span>
-        <span style="color:var(--color-accent-400);flex:none">/</span>
+      <div style="display:flex;justify-content:center;align-items:center;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 40px)/17.2);letter-spacing:.01em;white-space:nowrap;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(18,17,16,.75);animation:rise .9s .1s both">
+        <span style="flex: 1; text-align: center; font-size: 24px">Friday October 9th, 2026 @ 1PM</span>
       </div>
       <div style="height:1px;background:rgba(255,255,255,.4);margin-top:var(--space-3);transform-origin:left;animation:sweep 1s .3s both cubic-bezier(.22,.7,.2,1)"></div>
     </div>
@@ -119,21 +151,23 @@
     <div ref="{{ titleRef }}" style="position:absolute;left:0;right:0;top:58px;padding:var(--space-2) var(--space-4) 0;pointer-events:none;will-change:transform,opacity">
       
       <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:var(--space-3) 0;pointer-events:none">
-        <div style="animation:rise 1s .72s both;flex:none;margin-bottom:22px">
-          <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(-9deg)">
-            <img src="assets/trev.jpg" alt="Trev" style="width:100%;height:100%;object-fit:cover">
+        <div style="animation:rise 1s .72s both;flex:none;margin-top:4px">
+          <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(-9deg)">
+            <img src="assets/trev.jpg" alt="Trev" style="width:100%;height:100%;object-fit:cover;transform:translate(.4px,-.8px)">
           </div>
         </div>
-      <h1 style="flex:1 1 auto;min-width:0;overflow:visible;margin:0;text-align:center;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 480px) - 156px) / 10.6);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-shadow:0 1px 2px rgba(18,17,16,.95), 0 2px 9px rgba(18,17,16,.8);-webkit-text-stroke:0.9px rgba(18,17,16,.5);paint-order:stroke fill">
-        <span style="display: block; animation: rise 1.1s .42s both; text-align: center;  white-space: nowrap"><span style="color: var(--color-accent-400);">Trev's&nbsp;</span><span style="white-space: nowrap; ">BIRTHDAY</span><br>Fleet Weekend<br><span style="white-space: nowrap;  color: var(--color-accent-400);">ANDRE's&nbsp;</span><span style="white-space: nowrap; "></span>Roof Deck</span>
+      <h1 style="flex:1 1 auto;min-width:0;overflow:visible;margin:0;text-align:center;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 480px) - 172px) / 12.05);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 1px rgba(18,17,16,.85), 0 3px 14px rgba(18,17,16,.45);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">
+        <span style="display:block;animation:rise 1.1s .42s both;text-align:center;white-space:nowrap"><span style="color:var(--color-accent-400)">Trev's</span> 40th Birthday</span>
+        <span style="display:block;animation:rise 1.1s .5s both;text-align:center;white-space:nowrap">Fleet Weekend</span>
+        <span style="display:block;animation:rise 1.1s .58s both;text-align:center;white-space:nowrap"><span style="color:var(--color-accent-400)">Andre's</span> Roof Deck</span>
       </h1>
-        <div style="animation:rise 1s .84s both;flex:none;margin-bottom:22px">
-          <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(9deg)">
-            <img src="assets/andre.jpg" alt="André" style="width:100%;height:100%;object-fit:cover">
+        <div style="animation:rise 1s .84s both;flex:none;margin-top:4px">
+          <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:rotate(9deg)">
+            <img src="assets/andre.jpg" alt="André" style="width:100%;height:100%;object-fit:cover;object-position:41% 14%;transform:scale(1.16) translate(1.6px,2.8px)">
           </div>
         </div>
       </div>
-      <div style="height: 2px; background: rgba(255,255,255,.4); margin: var(--space-4) 0 var(--space-3); transform-origin: left; animation: sweep 1.1s .8s both cubic-bezier(.22,.7,.2,1)"></div>
+      <div style="height: 1px; background: rgba(255,255,255,.4); margin: var(--space-4) 0 var(--space-3); transform-origin: left; animation: sweep 1.1s .8s both cubic-bezier(.22,.7,.2,1)"></div>
       
     </div>
 
@@ -149,30 +183,31 @@
 
   <div style="margin:0 auto">
     <div data-reveal="" style="padding:var(--space-6) var(--space-4) var(--space-6)">
-      <p style="margin:0;font-size:17px;line-height:1.55;font-weight:500;text-wrap:pretty">One long afternoon above North Beach — jets over the bay, the city underneath, and the best light in San Francisco to finish on.</p>
-      <p style="margin:var(--space-3) 0 0;font-size:15px;line-height:1.6;color:var(--color-neutral-700);text-wrap:pretty">Come for an hour or stay for all of it. Doors at one, the sun does its thing around 6:45.</p>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">WHAT?</h6>
+      <p style="margin:0;font-size:17px;line-height:1.55;font-weight:500;text-wrap:pretty">It's Trev's 40th birthday, its Fleet Weekend, and it's summer time in the Bay, all on Andre's giant fucking roof deck!!!!!!!!!!</p>
+      <p style="margin:var(--space-3) 0 0;font-size:15px;line-height:1.6;color:var(--color-neutral-700);text-wrap:pretty">Stop by for an hour for the airshow, or stay for the whole shebang!!!</p>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--color-divider)">
       <div data-reveal="" style="padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider);border-right:1px solid var(--color-divider)">
-        <h6 style="margin:0 0 5px;font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">When</h6>
+        <h6 style="margin:0 0 5px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">WHEN?</h6>
         <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35">Friday, October 9<br>1:00 PM → sunset</p>
       </div>
       <div data-reveal="" style="padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider)">
-        <h6 style="margin:0 0 5px;font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">Where</h6>
+        <h6 style="margin:0 0 5px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">WHERE?</h6>
         <sc-if value="{{ addressLocked }}" hint-placeholder-val="{{ true }}">
-          <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35"><a href="#rsvp" style="color:var(--color-accent-700);text-decoration:none;border-bottom:1px solid var(--color-accent-700)">RSVP to get the address</a></p>
+          <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35"><a href="#rsvp" style="color:var(--color-accent-400);text-decoration:none;border-bottom:1px solid var(--color-accent-700)">RSVP to get the address</a></p>
         </sc-if>
         <sc-if value="{{ addressKnown }}">
           <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35"><a href="https://maps.google.com/?q=40+Edith+Street+San+Francisco" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--color-divider)">40 Edith Street #4<br>San Francisco</a></p>
         </sc-if>
       </div>
       <div data-reveal="" style="padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider);border-right:1px solid var(--color-divider)">
-        <h6 style="margin:0 0 5px;font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">Dress</h6>
+        <h6 style="margin:0 0 5px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">DRESS?</h6>
         <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35">As you like, plus a layer for sunset</p>
       </div>
       <div data-reveal="" style="padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider)">
-        <h6 style="margin:0 0 5px;font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">Guests</h6>
+        <h6 style="margin:0 0 5px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">GUESTS?</h6>
         <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35">Adults only — the roof isn't childproof</p>
       </div>
     </div>
@@ -182,14 +217,13 @@
     <div ref="{{ bandRef }}" style="position:absolute;inset:-14% 0;will-change:transform"><img src="assets/deck-4-sunset.jpeg" alt="The fiery sunset the deck faces" style="width:100%;height:100%;object-fit:cover"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(18,17,16,.8), rgba(18,17,16,.1) 60%)"></div>
     <div data-reveal="" style="position:absolute;left:0;right:0;bottom:0;padding:var(--space-6) var(--space-4);margin:0 auto">
-      <h2 style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(30px,8.5vw,48px);line-height:1;text-transform:uppercase;color:#fff">The light lands<br>at 6:45</h2>
-      <p style="margin:var(--space-3) 0 0;font-family:'Bungee',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-400)">Be up here for it</p>
+      <h2 style="margin: 0; font-family: 'Rubik Spray Paint',sans-serif; font-weight: 400; font-size: clamp(30px,8.5vw,48px); line-height: 1; text-transform: uppercase; color: #fff; text-align: center">1 PM to Sunset</h2>
     </div>
   </div>
 
   <div style="margin:0 auto">
     <div id="rsvp" style="padding:var(--space-8) var(--space-4);border-bottom:2px solid var(--color-divider)">
-      <h3 data-reveal="" style="margin:0 0 var(--space-4);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:34px;text-transform:uppercase">RSVP</h3>
+      <h3 data-reveal="" style="margin:0 0 var(--space-4);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:34px;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">RSVP</h3>
 
       <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
@@ -218,9 +252,9 @@
             <input class="input" id="rsvp-bring" type="text" placeholder="A bottle, a dish, a playlist" style="min-height:48px;font-size:16px" value="{{ bring }}" onChange="{{ onBring }}">
           </div>
           <sc-if value="{{ hasError }}">
-            <p style="margin:0;font-size:13px;font-weight:600;color:var(--color-accent-700);animation:rise .4s both">{{ error }}</p>
+            <p style="margin:0;font-size:13px;font-weight:600;color:var(--color-accent-400);animation:rise .4s both">{{ error }}</p>
           </sc-if>
-          <button class="btn btn-primary btn-block" onClick="{{ submit }}" style="min-height:52px;margin:0;font-family:'Bungee',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.04em;transition:background .2s, transform .14s" style-active="transform:scale(.985)">Send my RSVP</button>
+          <button class="btn btn-primary btn-block" onClick="{{ submit }}" style="background:var(--color-accent-400);border-color:var(--color-accent-400);color:var(--color-neutral-900);min-height:52px;margin:0;font-family:'Bungee',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.04em;transition:background .2s, transform .14s" style-active="transform:scale(.985)">Send my RSVP</button>
         </div>
       </sc-if>
 
@@ -240,30 +274,30 @@
       <div style="padding:var(--space-8) var(--space-4);border-bottom:2px solid var(--color-divider)">
         <div data-reveal="" style="display:flex;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-3)">
           <h3 style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;text-transform:uppercase">On the roof</h3>
-          <span style="margin-left:auto;font-family:'Bungee',sans-serif;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--color-accent-700)">{{ countLine }}</span>
+          <span style="margin-left:auto;font-family:'Bungee',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--color-accent-700)">{{ countLine }}</span>
         </div>
         <div style="display:flex;align-items:flex-end;gap:var(--space-4);border-top:1px solid var(--color-divider);padding-top:var(--space-4)">
-          <span style="font-family:'Rubik Spray Paint',sans-serif;font-size:64px;line-height:.82;color:var(--color-accent-400)">{{ headCount }}</span>
+          <span style="font-family:'Rubik Spray Paint',sans-serif;font-size:64px;line-height:.82;color:var(--color-accent-400);-webkit-text-stroke:0.9px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">{{ headCount }}</span>
           <p style="margin:0 0 6px;flex:1;min-width:0;font-size:14px;line-height:1.45;text-wrap:pretty">{{ tallyLine }}</p>
         </div>
         <sc-if value="{{ sendFailed }}">
-          <p style="margin:var(--space-3) 0 0;font-size:12.5px;line-height:1.45;color:var(--color-accent-700)">Your reply is saved on this phone but didn't reach the list — tell André directly.</p>
+          <p style="margin:var(--space-3) 0 0;font-size:12.5px;line-height:1.45;color:var(--color-accent-400)">Your reply is saved on this phone but didn't reach the list — tell André directly.</p>
         </sc-if>
       </div>
     </sc-if>
 
     <div data-reveal="" style="padding:var(--space-8) var(--space-4) var(--space-4)">
-      <h6 style="margin:0 0 var(--space-2);font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">01 / Getting there</h6>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">01 / Getting there</h6>
       <p style="margin:0;font-size:15px;line-height:1.6;text-wrap:pretty">Don't drive. Edith is a one-block alley off Union, and street parking on Fleet Week weekend is a rumour. Rideshare, or take the 30 / 45 up Columbus and walk the last block. {{ doorLine }}</p>
     </div>
 
     <div data-reveal="" style="padding:var(--space-4);border-top:1px solid var(--color-divider)">
-      <h6 style="margin:0 0 var(--space-2);font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">02 / The Blue Angels</h6>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">02 / The Blue Angels</h6>
       <p style="margin:0;font-size:15px;line-height:1.6;text-wrap:pretty">Friday is Fleet Week's first show day and the deck faces the whole run. Expect the jets over the bay mid-afternoon — roughly three to four o'clock, weather permitting. It is very loud and completely worth it; bring earplugs if you're sound-sensitive.</p>
     </div>
 
     <div data-reveal="" style="padding:var(--space-4);border-top:1px solid var(--color-divider)">
-      <h6 style="margin:0 0 var(--space-2);font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">03 / What to bring</h6>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">03 / What to bring</h6>
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">
         <p style="margin:0;font-size:15px;line-height:1.5">A bottle to share, or a dish if you're inclined.</p>
         <p style="margin:0;font-size:15px;line-height:1.5">Whatever you actually like to drink — ice and glassware are inside.</p>
@@ -273,20 +307,20 @@
     </div>
 
     <div data-reveal="" style="padding:var(--space-4) var(--space-4) var(--space-8);border-top:1px solid var(--color-divider)">
-      <h6 style="margin:0 0 var(--space-3);font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent)">04 / Roof rules</h6>
+      <h6 style="margin:0 0 var(--space-3);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">04 / Roof rules</h6>
       <div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent);flex:none;padding-top:2px">01</span><span style="font-size:14.5px;line-height:1.45">No glass on the deck — cans, cups and plastic only.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent);flex:none;padding-top:2px">02</span><span style="font-size:14.5px;line-height:1.45">Stay off the railing. Don't sit on it, don't lean on it.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent);flex:none;padding-top:2px">03</span><span style="font-size:14.5px;line-height:1.45">Music comes down at 10 PM. House rule, not a suggestion.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent);flex:none;padding-top:2px">04</span><span style="font-size:14.5px;line-height:1.45">Quiet in the stairwell — there are neighbours the whole way down.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent);flex:none;padding-top:2px">05</span><span style="font-size:14.5px;line-height:1.45">Never prop the roof door. It locks for a reason.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-family:'Bungee',sans-serif;font-size:10px;color:var(--color-accent);flex:none;padding-top:2px">06</span><span style="font-size:14.5px;line-height:1.45">Carry your empties back down with you on the way out.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">01</span><span style="font-size:14.5px;line-height:1.45">No glass on the deck — cans, cups and plastic only.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">02</span><span style="font-size:14.5px;line-height:1.45">Stay off the railing. Don't sit on it, don't lean on it.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">03</span><span style="font-size:14.5px;line-height:1.45">Music comes down at 10 PM. House rule, not a suggestion.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">04</span><span style="font-size:14.5px;line-height:1.45">Quiet in the stairwell — there are neighbours the whole way down.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">05</span><span style="font-size:14.5px;line-height:1.45">Never prop the roof door. It locks for a reason.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">06</span><span style="font-size:14.5px;line-height:1.45">Carry your empties back down with you on the way out.</span></div>
       </div>
     </div>
   </div>
 
   <div style="position:relative;overflow:hidden;background:var(--color-neutral-900);color:var(--color-bg);padding:var(--space-8) var(--space-4) calc(var(--space-8) + 72px)">
-    <div data-no-wiggle="" style="position:absolute;inset:0"><img src="assets/deck-6-djs.jpg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panA 24s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
+    <div data-no-wiggle="" style="position:absolute;inset:0"><img src="assets/deck-4-sunset.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;animation:panA 24s cubic-bezier(.37,0,.63,1) -6s infinite alternate"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(18,17,16,.55) 0%, rgba(18,17,16,.72) 100%);pointer-events:none"></div>
     <div style="position:relative;margin:0 auto">
       <h2 data-reveal="" style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(38px,12vw,64px);line-height:.98;text-transform:uppercase">See you<br>on the roof</h2>
@@ -299,7 +333,7 @@
   </div>
 
   <div data-no-wiggle="" style="position:relative;border-top:2px solid var(--color-divider);background:var(--color-neutral-900);padding-bottom:78px">
-    <h2 style="position:absolute;z-index:2;top:var(--space-4);left:var(--space-4);margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(34px,11vw,52px);line-height:.96;letter-spacing:-.02em;text-transform:uppercase;color:var(--color-accent-400);pointer-events:none;text-shadow:0 1px 2px rgba(18,17,16,.95), 0 2px 10px rgba(18,17,16,.8)">Location</h2>
+    <h2 style="position:absolute;z-index:2;top:var(--space-4);left:var(--space-4);margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(34px,11vw,52px);line-height:.96;letter-spacing:-.02em;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;pointer-events:none;text-shadow:0 1px 2px rgba(18,17,16,.95), 0 2px 10px rgba(18,17,16,.8)">Location</h2>
     <a href="https://youtu.be/2_FEZe98PHs?t=110" target="_blank" rel="noopener" style="display:block;position:relative;aspect-ratio:16/9;overflow:hidden;text-decoration:none">
       <img src="assets/deck-5-party.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%">
       <span style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(18,17,16,.5) 0%, rgba(18,17,16,.25) 45%, rgba(18,17,16,.72) 100%)"></span>
@@ -310,13 +344,14 @@
     </a>
   </div>
 
+
   <div ref="{{ barRef }}" data-no-wiggle="" style="position:fixed;left:0;right:0;bottom:0;z-index:20;transform:translateY(140%);transition:transform .55s cubic-bezier(.22,.7,.2,1);will-change:transform">
     <div style="max-width:480px;margin:0 auto;display:flex;align-items:center;gap:var(--space-3);padding:10px var(--space-4) calc(10px + env(safe-area-inset-bottom));background:var(--color-neutral-900);color:var(--color-bg)">
       <div style="flex:1;min-width:0">
         <p style="margin:0;font-family:'Bungee',sans-serif;font-size:10px;letter-spacing:.06em;text-transform:uppercase">Oct 9 · 1 PM</p>
         <p style="margin:1px 0 0;font-size:11.5px;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ barLine }}</p>
       </div>
-      <a href="#rsvp" class="btn btn-primary" style="min-height:44px;padding-inline:14px;font-family:'Bungee',sans-serif;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;flex:none">{{ barCta }}</a>
+      <a href="#rsvp" class="btn btn-primary" style="background:var(--color-accent-400);border-color:var(--color-accent-400);color:var(--color-neutral-900);min-height:44px;padding-inline:14px;font-family:'Bungee',sans-serif;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;flex:none">{{ barCta }}</a>
     </div>
   </div>
 </div>
@@ -329,7 +364,7 @@
    bucket, hero timing and captions).                                     */
 const PARTY = {
   id: 'trev-2026-10-09',
-  title: 'Happy Birthday Trev',
+  title: "Trev's 40th Birthday",
   subtitle: "André's roof deck · Fleet Week",
   location: '40 Edith Street #4, San Francisco, CA 94133',
   start: '2026-10-09T13:00:00',
@@ -341,25 +376,38 @@ const PARTY = {
   captions: [
     'Coming in over the roof',
     'Blue Angels over the bay',
-    'Late sun, long shadows, nobody here yet',
-    'Last October, right as the lights came on',
-    'Downtown going blue at dusk',
-    'Dusk at the rail, city coming on',
-    'What 6:45 looks like from up here'
+    'Dusk on the deck',
+    'Jets over the rail',
+    'In toward the windows'
   ]
 };
 
 class Component extends DCLogic {
-  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
+  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', soundOn: false, videoBlocked: false, videoPlaying: false, rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
   stackRef = React.createRef();
   titleRef = React.createRef();
   bandRef = React.createRef();
   barRef = React.createRef();
+  trackRef = React.createRef();
   px = 0; py = 0; sy = 0;
 
   get key() { return 'roofdeck:' + PARTY.id; }
 
   componentDidMount() {
+    // every touch is a fresh gesture — keep trying to start playback on each one
+    ['touchstart', 'pointerdown', 'keydown'].forEach(ev =>
+      window.addEventListener(ev, () => {
+        if (!this.primed) this.primeVideos();
+        this.startTrack();
+        const act = document.querySelector('video[data-slide="' + this.state.i + '"]');
+        if (act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
+      }, { passive: true }));
+    // a backgrounded tab pauses video; resume when they come back
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible') return;
+      const act = document.querySelector('video[data-slide="' + this.state.i + '"]');
+      if (act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
+    });
     try {
       const raw = localStorage.getItem(this.key);
       if (raw) { const d = JSON.parse(raw); this.setState({ rsvps: d.rsvps || [], mine: d.mine || null }); }
@@ -372,6 +420,7 @@ class Component extends DCLogic {
     // as two things moving rather than two numbers ticking.
     this.a = 0; this.b = 0; this.videoReady = false;
     this.raceStart = performance.now();
+    this.winnerIs = Math.random() < 0.5 ? 'Trev' : 'André';
     const racer = () => ({
       dur: 4200 + Math.random() * 3600,          // wide spread: one can finish well ahead
       ph: Math.random() * 6.28,
@@ -382,43 +431,84 @@ class Component extends DCLogic {
       stall: Math.random() < 0.55 ? 0.3 + Math.random() * 0.4 : -1
     });
     this.rA = racer(); this.rB = racer();
-    document.querySelectorAll('video').forEach(v => { v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute('muted',''); v.setAttribute('playsinline',''); });
-    const vid = document.querySelector('video');
+    // The chosen winner runs a shorter course and waits nearer the line, so the
+    // two never sit at the same number while the page finishes loading.
+    const wA = this.winnerIs === 'Trev';
+    this.rA.dur = wA ? 5400 + Math.random() * 500 : 6300 + Math.random() * 700;
+    this.rB.dur = wA ? 6300 + Math.random() * 700 : 5400 + Math.random() * 500;
+    this.rA.hold = wA ? 90 + Math.random() * 4 : 62 + Math.random() * 12;
+    this.rB.hold = wA ? 62 + Math.random() * 12 : 90 + Math.random() * 4;
+    this.rA.release = wA ? 0 : 260 + Math.random() * 200;   // the loser leaves late
+    this.rB.release = wA ? 260 + Math.random() * 200 : 0;
+    document.querySelectorAll('video').forEach(v => {
+      v.muted = true; v.defaultMuted = true; v.playsInline = true;
+      v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+    });
+    // the splash clip has no data-slide, so nothing was ever asking it to play
+    const bg = document.querySelector('video:not([data-slide])');
+    if (bg) {
+      bg.muted = true; bg.defaultMuted = true; bg.playsInline = true; bg.loop = true;
+      const kick = () => {
+        if (!bg.paused) return;
+        bg.muted = true; bg.defaultMuted = true; bg.playsInline = true;
+        const p = bg.play(); if (p && p.catch) p.catch(() => {});
+      };
+      kick();
+      ['canplay','loadeddata','loadedmetadata','canplaythrough','stalled','suspend'].forEach(ev => bg.addEventListener(ev, kick));
+      ['touchstart','pointerdown'].forEach(ev => document.addEventListener(ev, kick, { passive: true }));
+      this.bgKick = setInterval(() => { if (this.state.splashGone) return clearInterval(this.bgKick); kick(); }, 400);
+    }
+    const vid = document.querySelector('video[data-slide="0"]');
+    if (vid && vid.dataset.src) { vid.setAttribute('src', vid.dataset.src); vid.load(); }
     if (vid) {
       if (vid.readyState >= 3) this.videoReady = true;
       else vid.addEventListener('canplaythrough', () => { this.videoReady = true; }, { once: true });
     } else { this.videoReady = true; }
-    const bump = (t, at, amt, width) => amt * Math.exp(-Math.pow((t - at) / width, 2));
+    // A smooth error-function ramp, plus one gentle surge that only ever adds
+    // distance — monotonic, so progress never needs clamping (the clamp against
+    // a backwards curve is what read as jitter).
+    const smoothstep = t => t * t * (3 - 2 * t);
     const curve = (rr, elapsed) => {
       const t = Math.min(1, elapsed / rr.dur);
-      const base = 1 - Math.pow(1 - t, 1.85);                        // smooth ease-out
-      const wob = Math.sin(elapsed / 1000 * rr.w * 2 + rr.ph) * rr.amp * (1 - t);
-      const surge = bump(t, rr.surgeAt, rr.surge, 0.13);             // a burst of speed
-      const stall = rr.stall > 0 ? -bump(t, rr.stall, rr.surge * 0.8, 0.1) : 0;
-      return Math.max(0, Math.min(1, base + wob + surge + stall)) * 100;
+      const base = 1 - Math.pow(1 - t, 2.1);
+      const surge = rr.surge * smoothstep(Math.max(0, Math.min(1, (t - rr.surgeAt) / 0.3)));
+      return Math.min(1, base * (1 - rr.surge) + surge * (1 - base) + base * rr.surge) * 100;
     };
+    // Each racer runs on its own virtual clock. While the page is still
+    // loading that clock SLOWS as it nears the line instead of stopping at a
+    // ceiling — so there is never a pause and never a final jump; once ready,
+    // the pace eases back to full and the curve carries it to 100.
+    this.rA.vt = 0; this.rB.vt = 0; this.rA.pace = 1; this.rB.pace = 1;
+    this.lastFrame = performance.now();
     const tick = () => {
       if (this.state.splashGone) return;
-      const elapsed = performance.now() - this.raceStart;
+      const nowMs = performance.now();
+      const dt = Math.min(48, nowMs - this.lastFrame);
+      this.lastFrame = nowMs;
+      const elapsed = nowMs - this.raceStart;
       this.raceClock = elapsed;
-      const open = (this.videoReady && elapsed > 4200) || elapsed > 8000;
-      const cap = open ? 100 : 86;
-      // glide toward the curve, and drift into the cap instead of clipping at it
-      const step = (cur, rr) => {
-        const want = Math.min(curve(rr, elapsed), cap);
-        return Math.max(cur, cur + (want - cur) * (want >= cap - 0.5 ? 0.05 : 0.3));
+      const open = elapsed > 5600;   // the racers finish out the 7 seconds from here
+      if (open && !this.openedAt) this.openedAt = elapsed;
+      const step = rr => {
+        const free = open && elapsed - this.openedAt >= rr.release;
+        const p = curve(rr, rr.vt);
+        // held back: ease the clock down to a crawl as it approaches the line
+        const target = free ? 1 : Math.max(0.07, 1 - Math.pow(p / 100, 1.6) * 0.97);
+        rr.pace += (target - rr.pace) * 0.05;             // no sudden acceleration
+        rr.vt += dt * rr.pace;
+        return curve(rr, rr.vt);
       };
-      this.a = step(this.a, this.rA);
-      this.b = step(this.b, this.rB);
-      if (this.a > 99.4) this.a = 100;
-      if (this.b > 99.4) this.b = 100;
+      this.a = step(this.rA);
+      this.b = step(this.rB);
+      if (this.a > 99.5) this.a = 100;
+      if (this.b > 99.5) this.b = 100;
       if (!this.first && (this.a >= 100 || this.b >= 100)) this.first = this.a >= 100 ? 'Trev' : 'André';
       this.setState({ pa: this.a, pb: this.b });
       if (this.a >= 100 && this.b >= 100) {
         this.setState({ loading: false, winner: this.first });
         setTimeout(() => {
           this.setState({ splashGone: true, i: 0 });
-          const v = document.querySelector('video');
+          const v = document.querySelector('video[data-slide="0"]');
           if (v) { try { v.currentTime = 0; v.play(); } catch (e) {} }
           this.startCarousel();
         }, 1600);
@@ -427,6 +517,12 @@ class Component extends DCLogic {
       this.raceRaf = requestAnimationFrame(tick);
     };
     this.raceRaf = requestAnimationFrame(tick);
+    // hard stop: the splash always lifts at 7s, loaded or not
+    this.splashCap = setTimeout(() => {
+      if (this.state.splashGone) return;
+      this.setState({ loading: false, winner: this.first || this.winnerIs });
+      setTimeout(() => { this.setState({ splashGone: true, i: 0 }); this.startCarousel(); }, 700);
+    }, 7000);
 
     this.secs = Number(this.props.slideSeconds ?? PARTY.slideSeconds) * 1000;
 
@@ -481,11 +577,43 @@ class Component extends DCLogic {
 
   // A video slide holds the carousel until the clip has played through;
   // photo slides advance on the normal dwell.
+  // iOS will only start a video inside a user gesture when autoplay is refused.
+  // One tap anywhere unlocks every clip for the rest of the session.
+  startTrack() {
+    const a = this.trackRef && this.trackRef.current;
+    if (!a || this.trackStarted) return;
+    this.trackStarted = true;
+    a.volume = 0;
+    const seekIn = () => { try { if (a.seekable.length && a.seekable.end(0) > 45) a.currentTime = 42; } catch (e) {} };
+    if (a.readyState < 1) a.addEventListener('loadedmetadata', seekIn, { once: true });
+    else seekIn();
+    const p = a.play();
+    if (p && p.catch) p.catch(() => { this.trackStarted = false; });
+    // fade up rather than slamming in
+    const target = 0.9;
+    const fade = setInterval(() => {
+      if (!a || a.paused) return clearInterval(fade);
+      a.volume = Math.min(target, a.volume + target / 28);
+      if (a.volume >= target - 0.01) clearInterval(fade);
+    }, 45);
+  }
+
+  primeVideos() {
+    const vids = Array.from(document.querySelectorAll('video[data-slide]')).filter(v => v.getAttribute('src'));
+    vids.forEach(v => {
+      v.muted = true; v.defaultMuted = true; v.playsInline = true;
+      const p = v.play();
+      if (p && p.then) p.then(() => { if (Number(v.dataset.slide) !== this.state.i) v.pause(); }).catch(() => {});
+    });
+    this.primed = true;
+  }
+
   startCarousel() {
     clearInterval(this.timer);
     const videos = Array.from(document.querySelectorAll('video[data-slide]'));
     videos.forEach(v => {
       v.loop = false;
+      // fallback only — the crossfade normally starts before a clip can end
       const done = () => { if (Number(v.dataset.slide) === this.state.i) this.advance(); };
       v.addEventListener('ended', done);
       v.addEventListener('error', done);
@@ -493,34 +621,69 @@ class Component extends DCLogic {
     this.videos = videos;
     this.timer = setInterval(() => {
       this.syncVideos();
+      const held = performance.now() - (this.lastAdvance || 0);
+      if (held < 1500) return;                       // cooldown: never two hand-overs in a row
+      const n = videos.length;
       const v = videos.find(el => Number(el.dataset.slide) === this.state.i);
-      if (v) {
-        // The clip normally decides when it's done — but never let a refused
-        // or broken playback freeze the hero.
-        const held = performance.now() - (this.lastAdvance || 0);
-        const budget = ((v.duration && isFinite(v.duration) ? v.duration : this.secs / 1000) * 1000) + 1800;
-        const refused = v.paused && v.currentTime === 0 && held > 1600;
-        if (refused || held > budget) this.advance();
-        return;
-      }
-      if (performance.now() - (this.lastAdvance || 0) < this.secs) return;
-      this.advance();
-    }, 200);
+      if (!v) { if (held >= this.secs) this.advance(); return; }
+      const nxt = videos.find(el => Number(el.dataset.slide) === (this.state.i + 1) % n);
+      const nextReady = !nxt || nxt.readyState >= 3;
+      const left = (v.duration || 0) - v.currentTime;
+      const min = Number(v.dataset.min || 0);
+      if (min && v.currentTime < min && !v.paused) return;   // per-slide minimum screen time
+      // hand over a beat early so the outgoing clip is still moving through the fade
+      if (!v.paused && isFinite(left) && left > 0 && left < 1.3 && nextReady) { this.advance(); return; }
+      // watchdog: a refused or stalled clip must never freeze the hero
+      const budget = ((isFinite(v.duration) && v.duration ? v.duration : 5) * 1000) + 2600;
+      if (v.paused && held > 3200) this.advance();
+      else if (held > budget) this.advance();
+    }, 250);
     this.lastAdvance = performance.now();
   }
 
   // The active slide's clip plays from the top; every other clip rests.
   syncVideos() {
     const vids = this.videos && this.videos.length ? this.videos : Array.from(document.querySelectorAll('video[data-slide]'));
+    const n = vids.length;
+    const i = this.state.i;
+    // Attach every source once and leave it attached. Tearing sources down to
+    // free decoders blanked the element mid-fade, which is what flickered; the
+    // clips are ~1 MB each now, so holding all five is cheap.
+    vids.forEach(v => {
+      const src = v.dataset.src;
+      if (src && v.getAttribute('src') !== src) { v.setAttribute('src', src); try { v.load(); } catch (e) {} }
+    });
     vids.forEach(v => {
       // React never writes these as attributes; iOS blocks inline playback without them
-      if (!v.dataset.ios) { v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.dataset.ios = '1'; }
+      if (!v.dataset.ios) {
+        v.muted = true; v.defaultMuted = true; v.playsInline = true;
+        v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+        v.dataset.ios = '1';
+      }
       const mine = Number(v.dataset.slide) === this.state.i;
+      v.muted = true;
       if (mine) {
-        if (this.playing !== v) { this.playing = v; try { v.currentTime = 0; } catch (e) {} }
-        if (v.paused && v.readyState >= 2) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+        v.dataset.fadeOut = '';
+        const from = Number(v.dataset.start || 0);
+        if (this.playing !== v) { this.playing = v; try { v.currentTime = from; } catch (e) {} }
+        // preload="none" never fetches until asked — kick it off
+        if (v.readyState < 2 && !v.dataset.kicked && v.getAttribute('src')) { v.dataset.kicked = '1'; try { v.load(); } catch (e) {} }
+        // a clip left sitting on its last frame has to be rewound before it can play again
+        if (v.paused && v.duration && v.currentTime >= v.duration - 0.08) { try { v.currentTime = from; } catch (e) {} }
+        if (!v.paused && v.currentTime > 0.12 && !this.state.videoPlaying) this.setState({ videoPlaying: true });
+        if (v.paused) {
+          const pr = v.play();
+          if (pr && pr.then) pr.then(() => { if (this.state.videoBlocked) this.setState({ videoBlocked: false }); })
+                              .catch(() => {
+                                this.blocked = (this.blocked || 0) + 1;
+                                if (!this.state.videoBlocked) this.setState({ videoBlocked: true });
+                              });
+        }
       } else if (!v.paused) {
-        v.pause();
+        // keep the outgoing clip running through the crossfade, then rest it
+        const t = Number(v.dataset.fadeOut || 0);
+        if (!t) v.dataset.fadeOut = String(performance.now());
+        else if (performance.now() - t > 1400) { v.pause(); v.dataset.fadeOut = ''; }
       }
     });
     if (!vids.some(v => Number(v.dataset.slide) === this.state.i)) this.playing = null;
@@ -530,6 +693,9 @@ class Component extends DCLogic {
     clearInterval(this.timer);
     clearTimeout(this.fallback);
     clearInterval(this.tallyTimer);
+    clearInterval(this.bgKick);
+    clearTimeout(this.splashCap);
+    clearTimeout(this.splashCap);
     cancelAnimationFrame(this.raceRaf);
     cancelAnimationFrame(this.raf);
     window.removeEventListener('scroll', this.onScroll);
@@ -613,26 +779,57 @@ class Component extends DCLogic {
     const tMaybe = this.state.tally ? (this.state.tally.maybe || 0) : maybe;
     const order = { yes: 0, maybe: 1, no: 2 };
     const label = { yes: 'Yes', maybe: 'Maybe', no: "Can't" };
-    const layer = n => 'position:absolute;inset:0;overflow:hidden;transition:opacity 1500ms cubic-bezier(.4,0,.2,1);opacity:' +
+    const layer = n => 'position:absolute;inset:0;overflow:hidden;will-change:opacity;z-index:' + (n === i ? 2 : 1) +
+      ';transition:opacity 1200ms cubic-bezier(.45,0,.55,1);opacity:' +
       (n === i ? 1 : 0) + (gray ? ';filter:grayscale(1) contrast(1.08)' : '');
     const tagStyle = st => "display:inline-flex;align-items:center;font-family:'Bungee',sans-serif;font-size:9.5px;text-transform:uppercase;padding:3px 9px;flex:none;" +
-      (st === 'yes' ? 'background:var(--color-accent);color:var(--color-bg)'
+      (st === 'yes' ? 'background:var(--color-accent-400);color:var(--color-neutral-900)'
         : st === 'maybe' ? 'background:var(--color-accent-200);color:var(--color-accent-800)'
         : 'background:var(--color-neutral-200);color:var(--color-neutral-700)');
 
     const { loading, splashGone, pa, pb, winner } = this.state;
     // driven every frame, so no CSS transition — a transition here fights the rAF updates
     const now = this.raceClock || 0;
-    const trail = p => 'height:100%;border-radius:999px;background:linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-400) 100%);width:' + Math.max(4, p).toFixed(1) + '%';
+    // Colour walks red → peach → warm gold as the racer gains ground.
+    // the design system's peach (accent-400 #ff9783), lifting toward white only at the leading edge
+    const mixOk = (t) => {
+      const stops = [[0.745, 0.142, 29], [0.775, 0.132, 31], [0.845, 0.098, 34]];
+      const k = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+      const i = Math.min(stops.length - 2, Math.floor(k));
+      const f = k - i, a = stops[i], b = stops[i + 1];
+      const v = j => (a[j] + (b[j] - a[j]) * f);
+      return 'oklch(' + v(0).toFixed(3) + ' ' + v(1).toFixed(3) + ' ' + v(2).toFixed(1) + ')';
+    };
+    const trail = (p, ph) => {
+      const t = p / 100;
+      const c0 = mixOk(t * 0.45), c1 = mixOk(t), c2 = mixOk(Math.min(1, t + 0.22));
+      // A heartbeat: two quick systolic kicks, then a long diastolic rest —
+      // the fill surges forward in pulses the way blood does, not evenly.
+      const beat = (now / 1000 * 1.15 + ph / 6.28) % 1;
+      const kick = Math.exp(-Math.pow((beat - 0.06) / 0.05, 2)) + 0.55 * Math.exp(-Math.pow((beat - 0.19) / 0.06, 2));
+      const bulge = 1 + kick * 0.16 + Math.sin(now / 1000 * 0.9 + ph) * 0.02;
+      const push = 1 + kick * 0.035;
+      return 'position:absolute;left:0;top:0;height:100%;border-radius:999px;width:' + Math.max(5, p).toFixed(2) + '%;' +
+        'background-image:radial-gradient(circle at 12% 120%, rgba(255,255,255,.5) 0 2px, transparent 2.5px),' +
+        'radial-gradient(circle at 46% -20%, rgba(255,255,255,.42) 0 2.5px, transparent 3px),' +
+        'linear-gradient(100deg, ' + c0 + ' 0%, ' + c1 + ' 62%, ' + c2 + ' 100%);' +
+        'background-size:150px 100%, 96px 100%, 260px 100%;' +
+        'background-repeat:repeat-x, repeat-x, repeat;' +
+        'animation:fizz 7.5s linear infinite, flow 6.2s linear infinite;' +
+        'box-shadow:0 0 ' + (10 + kick * 12).toFixed(1) + 'px ' + c1 + ', inset 0 1px 0 rgba(255,255,255,.45);' +
+        'transform:scale(' + push.toFixed(4) + ',' + bulge.toFixed(3) + ');transform-origin:left center;will-change:width,transform';
+    };
     // bob + squash: the heads bounce along the pill rather than sliding flat
     const lane = (p, ph, outcome) => {
-      const bob = Math.sin(now / 1000 * 5.2 + ph) * 7;
-      const sq = 1 + Math.sin(now / 1000 * 5.2 + ph) * 0.05;
+      const bob = Math.sin(now / 1000 * 2.3 + ph) * 4.5;
+      const sq = 1 + Math.sin(now / 1000 * 2.3 + ph) * 0.028;
       const base = 'position:absolute;top:50%;left:' + p.toFixed(2) + '%;will-change:left,transform;';
       // The winner blows up over the whole splash; the other one shrinks back.
-      if (outcome === 'win') return base + 'z-index:3;transform:translate(-50%,-50%) scale(5.4);' +
-        'transition:transform 1.05s cubic-bezier(.16,1.02,.3,1)';
-      if (outcome === 'lose') return base + 'z-index:1;opacity:.35;transform:translate(-50%,-50%) scale(.72);' +
+      // the winner slides to the middle of the screen as it blows up
+      if (outcome === 'win') return 'position:absolute;top:50%;left:50%;z-index:3;will-change:left,transform;' +
+        'transform:translate(-50%,-50%) scale(5.6);' +
+        'transition:left 1.15s cubic-bezier(.16,1.02,.3,1), transform 1.15s cubic-bezier(.16,1.02,.3,1)';
+      if (outcome === 'lose') return base + 'z-index:1;opacity:.3;transform:translate(-50%,-50%) scale(.66);' +
         'transition:transform .9s cubic-bezier(.22,.7,.2,1), opacity .9s ease';
       return base + 'transform:translate(-50%,-50%) translateY(' + bob.toFixed(2) + 'px) scale(' +
         (1 / sq).toFixed(3) + ',' + sq.toFixed(3) + ')';
@@ -645,11 +842,41 @@ class Component extends DCLogic {
       pctLabel: Math.round(Math.min(pa, pb)) + '%',
       laneA: lane(6 + pa * 0.88, this.rA ? this.rA.ph : 0, winner ? (winner === 'Trev' ? 'win' : 'lose') : null),
       laneB: lane(6 + pb * 0.88, this.rB ? this.rB.ph : 2.1, winner ? (winner === 'André' ? 'win' : 'lose') : null),
-      trailA: trail(pa),
-      trailB: trail(pb),
+      trailA: trail(pa, this.rA ? this.rA.ph : 0),
+      trailB: trail(pb, this.rB ? this.rB.ph : 2.1),
       raceLine: winner ? (winner === 'Trev' ? 'Trev takes it' : 'André takes it') : 'Hold tight',
+      trackRef: this.trackRef,
+      // shown on landing and until a clip is actually running
+      showPlay: !this.state.videoPlaying,
+      playBtn: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:16px;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .6s ease;opacity:' +
+        (this.state.videoPlaying ? 0 : 1),
+      tapToPlay: () => {
+        this.primeVideos();
+        const act = document.querySelector('video[data-slide="' + this.state.i + '"]');
+        if (act) { act.muted = true; act.playsInline = true; const p = act.play(); if (p && p.catch) p.catch(() => {}); }
+        this.setState({ videoBlocked: false });
+      },
+      soundOn: this.state.soundOn,
+      soundOff: !this.state.soundOn,
+      soundLabel: this.state.soundOn ? 'Mute the music' : 'Play the music',
+      creditStyle: 'position:absolute;right:14px;bottom:34px;z-index:4;max-width:172px;text-align:right;' +
+        "font-family:'Bungee',sans-serif;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;" +
+        'color:#fff;pointer-events:none;text-shadow:0 1px 2px rgba(18,17,16,.95);opacity:' + (this.state.soundOn ? 1 : .75),
+      soundBtn: 'position:absolute;right:14px;bottom:76px;z-index:4;width:44px;height:44px;border:1.5px solid rgba(255,255,255,.75);' +
+        'border-radius:50%;background:rgba(18,17,16,.35);backdrop-filter:blur(6px);color:#fff;cursor:pointer;' +
+        'font-size:17px;line-height:1;display:grid;place-items:center;padding:0;' +
+        'text-shadow:0 1px 2px rgba(18,17,16,.9)',
       stackRef: this.stackRef, titleRef: this.titleRef, bandRef: this.bandRef, barRef: this.barRef,
-      l1: layer(0), l2: layer(1), l3: layer(2), l4: layer(3), l5: layer(4), l6: layer(5), l7: layer(6),
+      l1: layer(0), l2: layer(1), l3: layer(2), l4: layer(3), l5: layer(4),
+      toggleSound: e => {
+        if (e && e.stopPropagation) e.stopPropagation();
+        const on = !this.state.soundOn;
+        this.setState({ soundOn: on });
+        const a = this.trackRef && this.trackRef.current;
+        if (!a) return;
+        if (on) { this.startTrack(); a.muted = false; const p = a.play(); if (p && p.catch) p.catch(() => {}); }
+        else a.muted = true;
+      },
       onTouchStart: e => { const t = e.touches[0]; this.tx = t.clientX; this.ty = t.clientY; },
       onTouchEnd: e => {
         const t = e.changedTouches[0];
