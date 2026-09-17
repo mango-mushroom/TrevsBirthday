@@ -27,11 +27,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&amp;family=Bungee:wght@400&amp;family=Archivo:wght@400;500;600;800&amp;display=swap">
   <style>
-    body { margin: 0; background: var(--color-neutral-900); overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+    html { overflow-x: hidden; }
+    body { margin: 0; background: var(--color-neutral-900); -webkit-tap-highlight-color: transparent; }
     a { color: var(--color-accent-400); }
     a:hover { color: var(--color-accent-300); }
     /* the system's states paint the base red — peach everywhere instead */
     .btn-primary { background: var(--color-accent-400); border-color: var(--color-accent-400); color: var(--color-neutral-900); }
+    .btn-ghost { color: var(--color-accent-700); }
+    .btn-ghost:hover { background: var(--color-accent-100); color: var(--color-accent-800); }
     .btn-primary:hover { background: var(--color-accent-300); border-color: var(--color-accent-300); }
     .btn-primary:active { background: var(--color-accent-500); border-color: var(--color-accent-500); }
     .seg-opt:has(input:checked) { background: var(--color-accent-400); color: var(--color-neutral-900); }
@@ -55,6 +58,8 @@
     @keyframes bob { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(7px); opacity: 1; } }
     @keyframes breathe { 0%, 100% { transform: scale(1); opacity: .82; } 50% { transform: scale(1.055); opacity: 1; } }
     @keyframes sweep { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes panStill { from { transform: scale(1.04) translate3d(-2%, 1%, 0); } to { transform: scale(1.12) translate3d(2%, -1.5%, 0); } }
+    @keyframes panX { from { object-position: 50% 50%; } to { object-position: 74% 50%; } }
     @keyframes flow { from { background-position: 0 50%; } to { background-position: 260px 50%; } }
     @keyframes fizz { from { background-position: 0 0, 0 0; } to { background-position: -150px 0, 96px 0; } }
   </style>
@@ -64,7 +69,7 @@
 
   <sc-if value="{{ splashOn }}" hint-placeholder-val="{{ true }}">
     <div data-no-wiggle="" style="{{ splashStyle }}">
-      <div style="position:absolute;inset:0;overflow:hidden;background:#3f7fb4 url('assets/splash-frame.jpg') center 26%/cover no-repeat"><video src="assets/hero-blueangels.mp4?v=3" poster="assets/splash-frame.jpg" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" style="width:100%;height:100%;object-fit:cover;object-position:50% 26%"></video></div>
+      <div data-splash-bg="" style="position:absolute;inset:0;overflow:hidden;background:#1d1a18"><img src="assets/splash-sunset.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 42%;animation:panStill 26s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
       <div style="position:relative;width:100%;max-width:480px;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-6)">
         <div style="display:flex;justify-content:center;align-items:center;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 40px)/17.2);letter-spacing:.01em;white-space:nowrap;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 2px rgba(18,17,16,.9);-webkit-text-stroke:0.6px rgba(18,17,16,.95);paint-order:stroke fill">
           <span style="color:var(--color-accent-400);flex:none">/</span>
@@ -107,12 +112,9 @@
 
   <div data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
     <div ref="{{ stackRef }}" data-no-wiggle="" style="position:absolute;inset:-6% -4%;will-change:transform">
-      <div style="position:absolute;inset:0;z-index:0;animation:panA 26s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/deck-4-sunset.jpeg') center/cover no-repeat"></div>
-      <div style="{{ l5 }}"><video data-src="assets/hero-windows.mp4?v=4" data-start="0.14" data-slide="4" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l2 }}"><video data-src="assets/hero-blueangels.mp4?v=3" data-start="0.14" data-slide="1" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l3 }}"><video data-src="assets/hero-dk.mp4?v=6" data-start="0" data-min="8" data-slide="2" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l1 }}"><video data-src="assets/hero-drone.mp4?v=12" data-slide="0" data-start="0.14" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l4 }}"><video data-src="assets/hero-deck.mp4?v=3" data-start="0.14" data-slide="3" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#20211f"><img src="assets/hero-still.jpg" alt="The roof deck at sunset over North Beach and the bay" style="width:100%;height:100%;object-fit:cover;animation:panStill 14s cubic-bezier(.37,0,.63,1) infinite alternate"></div>
+      <div style="{{ layerA }}"><video ref="{{ heroRef }}" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ layerB }}"><video ref="{{ heroRefB }}" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="width:100%;height:100%;object-fit:cover"></video></div>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #FAF9F500, #FAF9F500, #FAF9F500, #FAF9F500); pointer-events: none"></div>
     <audio ref="{{ trackRef }}" src="assets/party-track.mp3" loop="{{ true }}" preload="auto"></audio>
@@ -157,7 +159,7 @@
             <img src="assets/trev.jpg" alt="Trev" style="width:100%;height:100%;object-fit:cover;transform:translate(.4px,-.8px)">
           </div>
         </div>
-      <h1 style="flex:1 1 auto;min-width:0;overflow:visible;margin:0;text-align:center;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 480px) - 172px) / 12.05);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 1px rgba(18,17,16,.85), 0 3px 14px rgba(18,17,16,.45);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">
+      <h1 style="flex:1 1 auto;min-width:0;overflow:visible;margin:0;text-align:center;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 480px) - 176px) / 12.2);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 1px rgba(18,17,16,.85), 0 3px 14px rgba(18,17,16,.45);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">
         <span style="display:block;animation:rise 1.1s .42s both;text-align:center;white-space:nowrap"><span style="color:var(--color-accent-400)">Trev's</span> 40th Birthday</span>
         <span style="display:block;animation:rise 1.1s .5s both;text-align:center;white-space:nowrap">Fleet Weekend</span>
         <span style="display:block;animation:rise 1.1s .58s both;text-align:center;white-space:nowrap"><span style="color:var(--color-accent-400)">Andre's</span> Roof Deck</span>
@@ -172,13 +174,6 @@
       
     </div>
 
-    <div style="position:absolute;left:0;right:0;bottom:0;padding:var(--space-3) var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:8px">
-      <div style="display:flex;gap:5px;animation:rise 1s 1.16s both">
-        <sc-for list="{{ bars }}" as="bar" hint-placeholder-count="4">
-          <button onClick="{{ bar.go }}" aria-label="Show this photograph" style="flex:1;height:22px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center"><span style="{{ bar.style }}"></span></button>
-        </sc-for>
-      </div>
-    </div>
 
   </div>
 
@@ -214,16 +209,9 @@
     </div>
   </div>
 
-  <div style="position:relative;height:58svh;min-height:340px;overflow:hidden;background:var(--color-neutral-900)">
-    <div ref="{{ bandRef }}" style="position:absolute;inset:-14% 0;will-change:transform"><img src="assets/deck-4-sunset.jpeg" alt="The fiery sunset the deck faces" style="width:100%;height:100%;object-fit:cover"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(18,17,16,.8), rgba(18,17,16,.1) 60%)"></div>
-    <div data-reveal="" style="position:absolute;left:0;right:0;bottom:0;padding:var(--space-6) var(--space-4);margin:0 auto">
-      <h2 style="margin: 0; font-family: 'Rubik Spray Paint',sans-serif; font-weight: 400; font-size: clamp(30px,8.5vw,48px); line-height: 1; text-transform: uppercase; color: #fff; text-align: center">1 PM to Sunset</h2>
-    </div>
-  </div>
-
   <div style="margin:0 auto">
-    <div id="rsvp" style="padding:var(--space-8) var(--space-4);border-bottom:2px solid var(--color-divider)">
+    <div id="rsvp" data-on-photo="" style="position:relative;padding:var(--space-8) var(--space-4);border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);color:var(--color-text);background:var(--color-bg)">
+      
       <h3 data-reveal="" style="margin:0 0 var(--space-4);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:34px;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">RSVP</h3>
 
       <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
@@ -260,12 +248,12 @@
       </sc-if>
 
       <sc-if value="{{ sent }}">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start;animation:rise .7s both">
+        <div style="display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start;animation:rise .7s both;background:var(--color-surface, #fff);border:2px solid var(--color-divider);padding:var(--space-6) var(--space-4);box-shadow:var(--shadow-sm)">
           <span class="tag tag-accent" style="font-family:'Bungee',sans-serif;font-size:10px;text-transform:uppercase">{{ mineStatusLabel }}</span>
           <p style="margin:0;font-size:16px;line-height:1.55">{{ mineLine }}</p>
           <sc-if value="{{ addressKnown }}">
             <div style="width:100%;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:var(--space-4) 0;margin:var(--space-2) 0;animation:rise .8s .15s both">
-              <h6 style="margin:0 0 6px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:22px;line-height:1.08;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">Here's where</h6>
+              <h6 style="margin:0 0 6px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:22px;line-height:1.08;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">ADDRESS:</h6>
               <p style="margin:0;font-size:19px;font-weight:700;line-height:1.3"><a href="https://www.google.com/maps/search/?api=1&amp;query=40%20Edith%20Street%20%234%2C%20San%20Francisco%2C%20CA%2094133" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--color-accent-400)">40 Edith Street #4</a><br>San Francisco, CA 94133</p>
               <p style="margin:8px 0 0;font-size:13.5px;line-height:1.5;color:var(--color-neutral-700)">{{ doorLine }}</p>
             </div>
@@ -281,13 +269,22 @@
     <sc-if value="{{ showList }}" hint-placeholder-val="{{ true }}">
       <div style="padding:var(--space-8) var(--space-4);border-bottom:2px solid var(--color-divider)">
         <div data-reveal="" style="display:flex;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-3)">
-          <h3 style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;text-transform:uppercase">On the roof</h3>
-          <span style="margin-left:auto;font-family:'Bungee',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--color-accent-700)">{{ countLine }}</span>
+          <h3 style="margin:0;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">GUESTLIST:</h3>
+          
         </div>
         <div style="display:flex;align-items:flex-end;gap:var(--space-4);border-top:1px solid var(--color-divider);padding-top:var(--space-4)">
           <span style="font-family:'Rubik Spray Paint',sans-serif;font-size:64px;line-height:.82;color:var(--color-accent-400);-webkit-text-stroke:0.9px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">{{ headCount }}</span>
           <p style="margin:0 0 6px;flex:1;min-width:0;font-size:14px;line-height:1.45;text-wrap:pretty">{{ tallyLine }}</p>
         </div>
+        <sc-for list="{{ entries }}" as="e" hint-placeholder-count="0">
+          <div style="display:flex;align-items:baseline;gap:var(--space-3);padding:var(--space-3) 0;border-top:1px solid var(--color-divider);animation:rise .6s both">
+            <div style="flex:1;min-width:0">
+              <p style="margin:0;font-size:15px;font-weight:600">{{ e.name }}</p>
+              <p style="margin:2px 0 0;font-size:12.5px;line-height:1.4;color:var(--color-neutral-700)">{{ e.detail }}</p>
+            </div>
+            <span style="{{ e.tagStyle }}">{{ e.statusLabel }}</span>
+          </div>
+        </sc-for>
         <sc-if value="{{ sendFailed }}">
           <p style="margin:var(--space-3) 0 0;font-size:12.5px;line-height:1.45;color:var(--color-accent-400)">Your reply is saved on this phone but didn't reach the list — tell André directly.</p>
         </sc-if>
@@ -295,34 +292,34 @@
     </sc-if>
 
     <div data-reveal="" style="padding:var(--space-8) var(--space-4) var(--space-4)">
-      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">01 / Getting there</h6>
-      <p style="margin:0;font-size:15px;line-height:1.6;text-wrap:pretty">Don't drive. Edith is a one-block alley off Union, and street parking on Fleet Week weekend is a rumour. Rideshare, or take the 30 / 45 up Columbus and walk the last block. {{ doorLine }}</p>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">GETTING THERE</h6>
+      <p style="margin:0;font-size:15px;line-height:1.6;text-wrap:pretty">Don't drive. My place is located on a dead alley off of Grant, at the top of the hill, and street parking doesn't exist on Fleet Weekend.  Traffic is also a nightmare so take BART and walk or use bikeshare!  Uber and Muni works ok too!</p>
     </div>
 
     <div data-reveal="" style="padding:var(--space-4);border-top:1px solid var(--color-divider)">
-      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">02 / The Blue Angels</h6>
-      <p style="margin:0;font-size:15px;line-height:1.6;text-wrap:pretty">Friday is Fleet Week's first show day and the deck faces the whole run. Expect the jets over the bay mid-afternoon — roughly three to four o'clock, weather permitting. It is very loud and completely worth it; bring earplugs if you're sound-sensitive.</p>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">THE BLUE ANGELS</h6>
+      <p style="margin:0;font-size:15px;line-height:1.6;text-wrap:pretty">Friday is Fleet Week's first show day and the roof deck is one of the best viewing spots anywhere. Expect the jets over the bay (and my building) mid-afternoon — 2 to 4pm is primetime.  It is very loud and completely worth it; bring earplugs if you're sound-sensitive.</p>
     </div>
 
     <div data-reveal="" style="padding:var(--space-4);border-top:1px solid var(--color-divider)">
-      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">03 / What to bring</h6>
+      <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">WHAT TO BRING</h6>
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">
         <p style="margin:0;font-size:15px;line-height:1.5">A bottle to share, or a dish if you're inclined.</p>
-        <p style="margin:0;font-size:15px;line-height:1.5">Whatever you actually like to drink — ice and glassware are inside.</p>
+        <p style="margin:0;font-size:15px;line-height:1.5">Whatever you actually like to drink. Bring ice if making cocktails!</p>
         <p style="margin:0;font-size:15px;line-height:1.5">A warm layer. The wind arrives with the sunset, every time.</p>
-        <p style="margin:0;font-size:15px;line-height:1.5">No gifts. Trev has enough things; he'd rather have the company.</p>
+        <p style="margin:0;font-size:15px;line-height:1.5">It's Trev's fucking birthday so bring him your best hugs!</p>
       </div>
     </div>
 
     <div data-reveal="" style="padding:var(--space-4) var(--space-4) var(--space-8);border-top:1px solid var(--color-divider)">
-      <h6 style="margin:0 0 var(--space-3);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">04 / Roof rules</h6>
+      <h6 style="margin:0 0 var(--space-3);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">ROOF RULES</h6>
       <div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">01</span><span style="font-size:14.5px;line-height:1.45">No glass on the deck — cans, cups and plastic only.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">02</span><span style="font-size:14.5px;line-height:1.45">Stay off the railing. Don't sit on it, don't lean on it.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">03</span><span style="font-size:14.5px;line-height:1.45">Music comes down at 10 PM. House rule, not a suggestion.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">04</span><span style="font-size:14.5px;line-height:1.45">Quiet in the stairwell — there are neighbours the whole way down.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">05</span><span style="font-size:14.5px;line-height:1.45">Never prop the roof door. It locks for a reason.</span></div>
-        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">06</span><span style="font-size:14.5px;line-height:1.45">Carry your empties back down with you on the way out.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">1</span><span style="font-size:14.5px;line-height:1.45">No glass on the deck — cans, cups and plastic only.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">2</span><span style="font-size:14.5px;line-height:1.45">Stay off the railing. Don't sit on it, don't lean on it.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">3</span><span style="font-size:14.5px;line-height:1.45">Music ends with sunset.&nbsp; House rule, not a suggestion.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">4</span><span style="font-size:14.5px;line-height:1.45">Quiet in the stairwell, its important we respect my two elderly neighbors, within reason.&nbsp; They understand Fleet Weekend is loud, but we need to be mindful of noise, especially inside.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">5</span><span style="font-size:14.5px;line-height:1.45">No smoking on the roof deck.&nbsp; House rule, not a suggestion.</span></div>
+        <div style="display:flex;gap:var(--space-3);padding:10px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;flex:none;padding-top:2px">6</span><span style="font-size:14.5px;line-height:1.45">place holder<br></span></div>
       </div>
     </div>
   </div>
@@ -381,22 +378,35 @@ const PARTY = {
   // Paste the Google Apps Script web-app URL here (ends in /exec).
   // Empty string = RSVPs save on the guest's own phone only.
   sheetUrl: '',
+  clips: [
+    { src: 'assets/clip-1-drone.mp4',      start: 0,   secs: 4.4, pan: true },
+    { src: 'assets/clip-2-blueangels.mp4', start: 0,   secs: 6.6 },
+    { src: 'assets/clip-3-dusk.mp4',       start: 0,   secs: 9 },
+    { src: 'assets/clip-5-ba.mp4',         start: 0,   secs: 9 },
+    { src: 'assets/clip-6-deck2.mp4',      start: 0,   secs: 4.2 },
+    { src: 'assets/clip-7-zoomout.mp4',    start: 0,   secs: 3.4, pan: true },
+    { src: 'assets/clip-8-rise.mp4',       start: 0,   secs: 5.2, pan: true }
+  ],
   captions: [
     'Coming in over the roof',
     'Blue Angels over the bay',
     'Dusk on the deck',
-    'Jets over the rail',
-    'In toward the windows'
+    'The Blue Angels, low over the bay',
+    'Up on the deck',
+    'Pulling back over the roof',
+    'Up toward the sun'
   ]
 };
 
 class Component extends DCLogic {
-  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', soundOn: false, videoBlocked: false, videoPlaying: false, videoMode: false, rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
+  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', soundOn: false, videoBlocked: false, videoPlaying: false, videoMode: false, dipping: false, slot: 0, rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
   stackRef = React.createRef();
   titleRef = React.createRef();
   bandRef = React.createRef();
   barRef = React.createRef();
   trackRef = React.createRef();
+  heroRef = React.createRef();
+  heroRefB = React.createRef();
   px = 0; py = 0; sy = 0;
 
   get key() { return 'roofdeck:' + PARTY.id; }
@@ -405,16 +415,15 @@ class Component extends DCLogic {
     // every touch is a fresh gesture — keep trying to start playback on each one
     ['touchstart', 'pointerdown', 'keydown'].forEach(ev =>
       window.addEventListener(ev, () => {
-        if (!this.primed) this.primeVideos();
         this.startTrack();
-        const act = document.querySelector('video[data-slide="' + this.state.i + '"]');
-        if (act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
+        const act = this.heroRef && this.heroRef.current;
+        if (this.state.videoMode && act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
       }, { passive: true }));
     // a backgrounded tab pauses video; resume when they come back
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
-      const act = document.querySelector('video[data-slide="' + this.state.i + '"]');
-      if (act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
+      const act = this.heroRef && this.heroRef.current;
+      if (this.state.videoMode && act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
     });
     try {
       const raw = localStorage.getItem(this.key);
@@ -471,8 +480,8 @@ class Component extends DCLogic {
       v.muted = true; v.defaultMuted = true; v.playsInline = true;
       v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
     });
-    // the splash clip has no data-slide, so nothing was ever asking it to play
-    const bg = document.querySelector('video:not([data-slide])');
+    // the splash background clip (the hero element has no src until play is pressed)
+    const bg = null;
     if (bg) {
       bg.muted = true; bg.defaultMuted = true; bg.playsInline = true; bg.loop = true;
       const kick = () => {
@@ -485,12 +494,7 @@ class Component extends DCLogic {
       ['touchstart','pointerdown'].forEach(ev => document.addEventListener(ev, kick, { passive: true }));
       this.bgKick = setInterval(() => { if (this.state.splashGone) return clearInterval(this.bgKick); kick(); }, 400);
     }
-    const vid = document.querySelector('video[data-slide="0"]');
-    if (vid && vid.dataset.src) { vid.setAttribute('src', vid.dataset.src); vid.load(); }
-    if (vid) {
-      if (vid.readyState >= 3) this.videoReady = true;
-      else vid.addEventListener('canplaythrough', () => { this.videoReady = true; }, { once: true });
-    } else { this.videoReady = true; }
+    this.videoReady = true;   // the hero holds a still until the viewer presses play
     // A smooth error-function ramp, plus one gentle surge that only ever adds
     // distance — monotonic, so progress never needs clamping (the clamp against
     // a backwards curve is what read as jitter).
@@ -535,9 +539,6 @@ class Component extends DCLogic {
         this.setState({ loading: false, winner: this.first });
         setTimeout(() => {
           this.setState({ splashGone: true, i: 0 });
-          this.playing = null;
-          const v = document.querySelector('video[data-slide="0"]');
-          if (v) { try { v.currentTime = 0; v.play(); } catch (e) {} }
           this.startCarousel();
         }, 1600);
         return;
@@ -559,10 +560,12 @@ class Component extends DCLogic {
     this.secs = Number(this.props.slideSeconds ?? PARTY.slideSeconds) * 1000;
 
     this.onScroll = () => {
-      this.sy = window.scrollY || document.documentElement.scrollTop || 0;
+      this.sy = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
       this.schedule();
     };
     window.addEventListener('scroll', this.onScroll, { passive: true });
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    this.schedule();
 
 
     // Everything answers a touch with a short stutter.
@@ -603,24 +606,71 @@ class Component extends DCLogic {
   }
 
   advance() {
-    this.lastAdvance = performance.now();
-    this.setState(s => ({ i: (s.i + 1) % PARTY.captions.length }));
+    if (performance.now() - (this.lastAdvance || 0) < 900) return;  // never two handovers in a row
+    this.goClip((this.state.i + 1) % PARTY.clips.length);
   }
 
-  // A video slide holds the carousel until the clip has played through;
-  // photo slides advance on the normal dwell.
-  // iOS will only start a video inside a user gesture when autoplay is refused.
-  // One tap anywhere unlocks every clip for the rest of the session.
+  els() { return [this.heroRef.current, this.heroRefB.current]; }
+
+  prep(el, clip) {
+    if (!el || !clip) return;
+    el.muted = true; el.defaultMuted = true; el.playsInline = true; el.autoplay = true;
+    el.setAttribute('muted',''); el.setAttribute('playsinline',''); el.setAttribute('webkit-playsinline','');
+    if (el.getAttribute('src') !== clip.src) { el.setAttribute('src', clip.src); try { el.load(); } catch (e) {} }
+    const seek = () => { try { el.currentTime = clip.start || 0; } catch (e) {} };
+    if (el.readyState >= 1) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
+    if (!el.dataset.guard) {
+      el.dataset.guard = '1';
+      el.addEventListener('playing', () => {
+        if (this.els()[this.state.slot] === el) return;   // this one is on screen
+        el.pause();
+        const c = PARTY.clips[this.state.i] || {};
+        try { el.currentTime = c.start || 0; } catch (e) {}
+      });
+    }
+  }
+
+  // Play clip n on the idle element, then swap which layer is visible. Both
+  // clips are live across the fade, so the still never shows through.
+  goClip(n, gesture) {
+    const clip = PARTY.clips[n];
+    const els = this.els();
+    if (!clip || !els[0] || !els[1]) return;
+    const to = gesture ? 0 : 1 - this.state.slot;
+    const el = els[to];
+    this.lastAdvance = performance.now();
+    this.prep(el, clip);
+    try { el.currentTime = clip.start || 0; } catch (e) {}
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.objectPosition = '50% 50%';
+    el.style.animation = clip.pan ? 'panX ' + (clip.secs || 6).toFixed(1) + 's cubic-bezier(.33,0,.67,1) both' : 'none';
+    const p = el.play();
+    if (p && p.then) p.then(() => {
+      if (Math.abs(el.currentTime - (clip.start || 0)) > 0.4) { try { el.currentTime = clip.start || 0; } catch (e) {} }
+      this.setState({ videoBlocked: false });
+    }).catch(() => this.setState({ videoBlocked: true }));
+    this.setState({ i: n, slot: to });
+    // rest the outgoing element once the fade is done, and queue the next clip on it
+    clearTimeout(this.restTimer);
+    this.restTimer = setTimeout(() => {
+      const other = this.els()[1 - to];
+      if (other) { other.pause(); this.prep(other, PARTY.clips[(n + 1) % PARTY.clips.length]); }
+    }, 900);
+  }
+
   startTrack() {
     const a = this.trackRef && this.trackRef.current;
-    if (!a || this.trackStarted) return;
+    if (!a) return;
+    if (this.trackStarted) { if (!a.paused && !a.muted && !this.state.soundOn) this.setState({ soundOn: true }); return; }
     this.trackStarted = true;
     a.volume = 0;
     const seekIn = () => { try { if (a.seekable.length && a.seekable.end(0) > 45) a.currentTime = 42; } catch (e) {} };
     if (a.readyState < 1) a.addEventListener('loadedmetadata', seekIn, { once: true });
     else seekIn();
     const p = a.play();
-    if (p && p.catch) p.catch(() => { this.trackStarted = false; });
+    if (p && p.then) p.then(() => this.setState({ soundOn: true })).catch(() => { this.trackStarted = false; });
+    else if (p && p.catch) p.catch(() => { this.trackStarted = false; });
     // fade up rather than slamming in
     const target = 0.9;
     const fade = setInterval(() => {
@@ -630,105 +680,25 @@ class Component extends DCLogic {
     }, 45);
   }
 
-  primeVideos() {
-    const vids = Array.from(document.querySelectorAll('video[data-slide]')).filter(v => v.getAttribute('src'));
-    // iOS counts each play() against the single gesture; prime the ACTIVE clip
-    // now and let the rest start on their own turn
-    const act = vids.find(v => Number(v.dataset.slide) === this.state.i) || vids[0];
-    if (act) {
-      act.muted = true; act.defaultMuted = true; act.playsInline = true;
-      const p = act.play();
-      if (p && p.then) p.then(() => this.setState({ videoPlaying: true })).catch(() => {});
-    }
-    this.primed = true;
-  }
-
   startCarousel() {
-    clearInterval(this.timer);
-    const videos = Array.from(document.querySelectorAll('video[data-slide]'));
-    videos.forEach(v => {
-      v.loop = false;
-      // fallback only — the crossfade normally starts before a clip can end
-      const done = () => { if (Number(v.dataset.slide) === this.state.i) this.advance(); };
+    this.els().forEach(v => {
+      if (!v || v.dataset.wired) return;
+      v.dataset.wired = '1';
+      const done = () => { if (this.state.videoMode && v === this.els()[this.state.slot]) this.advance(); };
       v.addEventListener('ended', done);
       v.addEventListener('error', done);
     });
-    this.videos = videos;
+    clearInterval(this.timer);
     this.timer = setInterval(() => {
       if (!this.state.videoMode) return;
-      this.syncVideos();
+      const el = this.els()[this.state.slot];
+      if (!el) return;
+      const clip = PARTY.clips[this.state.i] || {};
       const held = performance.now() - (this.lastAdvance || 0);
-      if (held < 1500) return;                       // cooldown: never two hand-overs in a row
-      const n = videos.length;
-      const v = videos.find(el => Number(el.dataset.slide) === this.state.i);
-      if (!v) { if (held >= this.secs) this.advance(); return; }
-      const nxt = videos.find(el => Number(el.dataset.slide) === (this.state.i + 1) % n);
-      const nextReady = !nxt || nxt.readyState >= 3;
-      const left = (v.duration || 0) - v.currentTime;
-      const min = Number(v.dataset.min || 0);
-      if (min && v.currentTime < min && !v.paused) return;   // per-slide minimum screen time
-      // hand over a beat early so the outgoing clip is still moving through the fade
-      if (!v.paused && isFinite(left) && left > 0 && left < 1.3 && nextReady) { this.advance(); return; }
-      // watchdog: a refused or stalled clip must never freeze the hero
-      const budget = ((isFinite(v.duration) && v.duration ? v.duration : 5) * 1000) + 2600;
-      // Before anything has ever played, hold the slide and let the play button
-      // stand — don't march through stills.
-      if (!this.everPlayed) { if (this.state.videoPlaying) this.everPlayed = true; else return; }
-      if (v.paused && held > 3200) this.advance();
-      else if (held > budget) this.advance();
-    }, 250);
-    this.lastAdvance = performance.now();
-  }
-
-  // The active slide's clip plays from the top; every other clip rests.
-  syncVideos() {
-    const vids = this.videos && this.videos.length ? this.videos : Array.from(document.querySelectorAll('video[data-slide]'));
-    const n = vids.length;
-    const i = this.state.i;
-    // Attach every source once and leave it attached. Tearing sources down to
-    // free decoders blanked the element mid-fade, which is what flickered; the
-    // clips are ~1 MB each now, so holding all five is cheap.
-    vids.forEach(v => {
-      const src = v.dataset.src;
-      if (src && v.getAttribute('src') !== src) { v.setAttribute('src', src); try { v.load(); } catch (e) {} }
-    });
-    vids.forEach(v => {
-      // React never writes these as attributes; iOS blocks inline playback without them
-      if (!v.dataset.ios) {
-        v.muted = true; v.defaultMuted = true; v.playsInline = true;
-        v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
-        v.dataset.ios = '1';
-      }
-      const mine = Number(v.dataset.slide) === this.state.i;
-      v.muted = true;
-      if (mine) {
-        v.dataset.fadeOut = '';
-        const from = Number(v.dataset.start || 0);
-        if (this.playing !== v) { this.playing = v; try { v.currentTime = from; } catch (e) {} }
-        // a clip that ran to its end behind the splash sits on its last frame
-        if (v.paused && isFinite(v.duration) && v.currentTime >= v.duration - 0.25) { try { v.currentTime = from; } catch (e) {} }
-        // preload="none" never fetches until asked — kick it off
-        if (v.readyState < 2 && !v.dataset.kicked && v.getAttribute('src')) { v.dataset.kicked = '1'; try { v.load(); } catch (e) {} }
-        // a clip left sitting on its last frame has to be rewound before it can play again
-        if (v.paused && v.duration && v.currentTime >= v.duration - 0.08) { try { v.currentTime = from; } catch (e) {} }
-        const live = !v.paused && v.currentTime > 0.12 && v.readyState >= 2;
-        if (live !== this.state.videoPlaying) this.setState({ videoPlaying: live });
-        if (v.paused) {
-          const pr = v.play();
-          if (pr && pr.then) pr.then(() => { if (this.state.videoBlocked) this.setState({ videoBlocked: false }); })
-                              .catch(() => {
-                                this.blocked = (this.blocked || 0) + 1;
-                                if (!this.state.videoBlocked) this.setState({ videoBlocked: true });
-                              });
-        }
-      } else if (!v.paused) {
-        // keep the outgoing clip running through the crossfade, then rest it
-        const t = Number(v.dataset.fadeOut || 0);
-        if (!t) v.dataset.fadeOut = String(performance.now());
-        else if (performance.now() - t > 1400) { v.pause(); v.dataset.fadeOut = ''; }
-      }
-    });
-    if (!vids.some(v => Number(v.dataset.slide) === this.state.i)) this.playing = null;
+      if (clip.secs && el.currentTime - (clip.start || 0) >= clip.secs) this.advance();
+      else if (el.paused && held > 3500) this.advance();
+      else if (isFinite(el.duration) && el.duration && held > el.duration * 1000 + 3000) this.advance();
+    }, 300);
   }
 
   componentWillUnmount() {
@@ -738,10 +708,11 @@ class Component extends DCLogic {
     clearInterval(this.bgKick);
     clearInterval(this.autoKick);
     clearTimeout(this.splashCap);
-    clearTimeout(this.splashCap);
+    clearTimeout(this.restTimer);
     cancelAnimationFrame(this.raceRaf);
     cancelAnimationFrame(this.raf);
     window.removeEventListener('scroll', this.onScroll);
+    document.removeEventListener('scroll', this.onScroll, true);
     document.removeEventListener('pointerdown', this.onPress, true);
     if (this.io) this.io.disconnect();
   }
@@ -752,18 +723,18 @@ class Component extends DCLogic {
   }
 
   paint() {
-    const y = this.sy;
+    const y = this.sy || 0;
     if (this.stackRef.current) {
       this.stackRef.current.style.transform = 'translate3d(' + (this.px * 14).toFixed(2) + 'px,' + (this.py * 10 + y * 0.16).toFixed(2) + 'px,0)';
     }
     if (this.titleRef.current) {
-      const t = Math.min(1, y / 480);
-      this.titleRef.current.style.opacity = String(1 - t);
+      const p = Math.min(1, y / 480);
+      this.titleRef.current.style.opacity = String(1 - p);
       this.titleRef.current.style.transform = 'translate3d(0,' + (y * -0.05).toFixed(2) + 'px,0)';
     }
     if (this.bandRef.current) {
-      const r = this.bandRef.current.getBoundingClientRect();
-      const mid = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      const rect = this.bandRef.current.getBoundingClientRect();
+      const mid = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
       this.bandRef.current.style.transform = 'translate3d(0,' + (mid * -46).toFixed(2) + 'px,0)';
     }
     if (this.barRef.current) {
@@ -823,6 +794,7 @@ class Component extends DCLogic {
     const order = { yes: 0, maybe: 1, no: 2 };
     const label = { yes: 'Yes', maybe: 'Maybe', no: "Can't" };
     const vmode = this.state.videoMode;
+    const dip = this.state.dipping;
     const layer = n => 'position:absolute;inset:0;overflow:hidden;will-change:opacity;z-index:' + (n === i ? 2 : 1) +
       ';transition:opacity 1200ms cubic-bezier(.45,0,.55,1);opacity:' +
       (vmode && n === i ? 1 : 0) + (gray ? ';filter:grayscale(1) contrast(1.08)' : '');
@@ -837,7 +809,7 @@ class Component extends DCLogic {
     // Colour walks red → peach → warm gold as the racer gains ground.
     // the design system's peach (accent-400 #ff9783), lifting toward white only at the leading edge
     const mixOk = (t) => {
-      const stops = [[0.745, 0.142, 29], [0.775, 0.132, 31], [0.845, 0.098, 34]];
+      const stops = [[0.92, 0.024, 44], [0.96, 0.012, 45], [1.00, 0.000, 46]];
       const k = Math.max(0, Math.min(1, t)) * (stops.length - 1);
       const i = Math.min(stops.length - 2, Math.floor(k));
       const f = k - i, a = stops[i], b = stops[i + 1];
@@ -854,13 +826,13 @@ class Component extends DCLogic {
       const bulge = 1 + kick * 0.16 + Math.sin(now / 1000 * 0.9 + ph) * 0.02;
       const push = 1 + kick * 0.035;
       return 'position:absolute;left:0;top:0;height:100%;border-radius:999px;width:' + Math.max(5, p).toFixed(2) + '%;' +
-        'background-image:radial-gradient(circle at 12% 120%, rgba(255,255,255,.5) 0 2px, transparent 2.5px),' +
-        'radial-gradient(circle at 46% -20%, rgba(255,255,255,.42) 0 2.5px, transparent 3px),' +
+        'background-image:radial-gradient(circle at 12% 120%, rgba(255,255,255,1) 0 2px, transparent 2.6px),' +
+        'radial-gradient(circle at 46% -20%, rgba(186,203,222,.75) 0 2.5px, transparent 3px),' +
         'linear-gradient(100deg, ' + c0 + ' 0%, ' + c1 + ' 62%, ' + c2 + ' 100%);' +
         'background-size:150px 100%, 96px 100%, 260px 100%;' +
         'background-repeat:repeat-x, repeat-x, repeat;' +
         'animation:fizz 7.5s linear infinite, flow 6.2s linear infinite;' +
-        'box-shadow:0 0 ' + (10 + kick * 12).toFixed(1) + 'px ' + c1 + ', inset 0 1px 0 rgba(255,255,255,.45);' +
+        'box-shadow:0 0 ' + (10 + kick * 14).toFixed(1) + 'px rgba(255,255,255,.6), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -2px 5px rgba(150,160,175,.22);' +
         'transform:scale(' + push.toFixed(4) + ',' + bulge.toFixed(3) + ');transform-origin:left center;will-change:width,transform';
     };
     // bob + squash: the heads bounce along the pill rather than sliding flat
@@ -891,76 +863,46 @@ class Component extends DCLogic {
       raceLine: winner ? (winner === 'Trev' ? 'Trev takes it' : 'André takes it') : 'Hold tight',
       trackRef: this.trackRef,
       showPlay: !this.state.videoMode,
+      heroRef: this.heroRef,
+      stackRef: this.stackRef,
+      titleRef: this.titleRef,
+      bandRef: this.bandRef,
+      barRef: this.barRef,
+      layerA: 'position:absolute;inset:0;overflow:hidden;will-change:opacity;z-index:' + (this.state.slot === 0 ? 2 : 1) +
+        ';transition:opacity 700ms cubic-bezier(.45,0,.55,1);opacity:' + (vmode && this.state.slot === 0 ? 1 : 0),
+      layerB: 'position:absolute;inset:0;overflow:hidden;will-change:opacity;z-index:' + (this.state.slot === 1 ? 2 : 1) +
+        ';transition:opacity 700ms cubic-bezier(.45,0,.55,1);opacity:' + (vmode && this.state.slot === 1 ? 1 : 0),
+      heroRefB: this.heroRefB,
       playBtn: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:16px;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .6s ease;opacity:' +
         (this.state.videoMode ? 0 : 1),
       tapToPlay: e => {
-        // the button sits inside the hero, whose click advances the slide — that
-        // was swapping away the clip the tap just started
         if (e) { if (e.stopPropagation) e.stopPropagation(); if (e.preventDefault) e.preventDefault(); }
-        // iOS allows ONE video to start per gesture, and only synchronously:
-        // start the active clip first, before anything async touches it
-        const all = Array.from(document.querySelectorAll('video'));
-        const cur = this.state.i;
-        all.forEach(v => {
-          v.muted = true; v.defaultMuted = true; v.playsInline = true;
-          v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
-          const src = v.dataset.src;
-          if (src && v.getAttribute('src') !== src) v.setAttribute('src', src);
-          try { v.currentTime = Number(v.dataset.start || 0); } catch (e) {}
-          const pr = v.play();
-          if (pr && pr.then) pr.then(() => {
-            if (v.dataset.slide === undefined) return;                 // splash clip keeps running
-            if (Number(v.dataset.slide) === cur) this.setState({ videoPlaying: true, videoBlocked: false });
-            else v.pause();                                            // unlocked, now resting
-          }).catch(() => {});
-        });
-        this.unlocked = true;
-        this.setState({ videoMode: true, i: 0 });
+        this.setState({ videoMode: true });
         this.everPlayed = true;
-        this.startCarousel();
-        this.lastAdvance = performance.now();
+        this.goClip(0, true);          // synchronous: keeps the iOS gesture unlock
         this.startTrack();
-        this.setState({ videoBlocked: false });
       },
+
       soundOn: this.state.soundOn,
       soundOff: !this.state.soundOn,
       soundLabel: this.state.soundOn ? 'Mute the music' : 'Play the music',
-      creditStyle: 'position:absolute;right:14px;bottom:34px;z-index:4;max-width:172px;text-align:right;' +
-        "font-family:'Bungee',sans-serif;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;" +
-        'color:#fff;pointer-events:none;text-shadow:0 1px 2px rgba(18,17,16,.95);opacity:' + (this.state.soundOn ? 1 : .75),
-      soundBtn: 'position:absolute;right:14px;bottom:76px;z-index:4;width:44px;height:44px;border:1.5px solid rgba(255,255,255,.75);' +
-        'border-radius:50%;background:rgba(18,17,16,.35);backdrop-filter:blur(6px);color:#fff;cursor:pointer;' +
-        'font-size:17px;line-height:1;display:grid;place-items:center;padding:0;' +
-        'text-shadow:0 1px 2px rgba(18,17,16,.9)',
-      stackRef: this.stackRef, titleRef: this.titleRef, bandRef: this.bandRef, barRef: this.barRef,
-      l1: layer(0), l2: layer(1), l3: layer(2), l4: layer(3), l5: layer(4),
+      soundBtn: 'position:absolute;bottom:var(--space-4);left:var(--space-4);z-index:7;width:42px;height:42px;display:grid;place-items:center;padding:0;' +
+        'border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(18,17,16,.35);backdrop-filter:blur(4px);color:#fff;cursor:pointer;' +
+        '-webkit-tap-highlight-color:transparent',
+      creditStyle: 'position:absolute;bottom:calc(var(--space-4) + 12px);left:calc(var(--space-4) + 52px);right:var(--space-4);z-index:7;pointer-events:none;' +
+        "font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 100px) / 24.5);line-height:1.2;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;" +
+        'color:rgba(255,255,255,.88);text-shadow:0 1px 4px rgba(18,17,16,.9)',
       toggleSound: e => {
-        if (e && e.stopPropagation) e.stopPropagation();
-        const on = !this.state.soundOn;
-        this.setState({ soundOn: on });
+        if (e) { if (e.stopPropagation) e.stopPropagation(); if (e.preventDefault) e.preventDefault(); }
         const a = this.trackRef && this.trackRef.current;
         if (!a) return;
-        if (on) { this.startTrack(); a.muted = false; const p = a.play(); if (p && p.catch) p.catch(() => {}); }
-        else a.muted = true;
+        if (this.state.soundOn) { a.muted = true; a.pause(); this.setState({ soundOn: false }); return; }
+        a.muted = false;
+        a.volume = 0.9;
+        const p = a.play();
+        if (p && p.then) p.then(() => this.setState({ soundOn: true })).catch(() => {});
+        else this.setState({ soundOn: true });
       },
-      onTouchStart: e => { const t = e.touches[0]; this.tx = t.clientX; this.ty = t.clientY; },
-      onTouchEnd: e => {
-        const t = e.changedTouches[0];
-        const dx = t.clientX - (this.tx || 0), dy = t.clientY - (this.ty || 0);
-        if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) {
-          const n = PARTY.captions.length;
-          this.setState(s => ({ i: (s.i + (dx < 0 ? 1 : n - 1)) % n }));
-        }
-      },
-      counter: String(i + 1).padStart(2, '0') + ' / ' + String(PARTY.captions.length).padStart(2, '0'),
-      caption: PARTY.captions[i],
-      bars: PARTY.captions.map((c, n) => ({
-        go: e => { if (e && e.stopPropagation) e.stopPropagation(); this.lastAdvance = performance.now(); this.setState({ i: n }); },
-        style: 'display:block;width:100%;height:' + (n === i ? '4px' : '2px') +
-          ';transition:height .4s cubic-bezier(.22,.7,.2,1), background .4s;background:' +
-          (n === i ? 'var(--color-accent-400)' : 'rgba(255,255,255,.4)')
-      })),
-      next: () => { this.lastAdvance = performance.now(); this.setState(s => ({ i: (s.i + 1) % PARTY.captions.length })); },
 
       formOpen: !mine || editing,
       sent: !!mine && !editing,
