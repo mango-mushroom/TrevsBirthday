@@ -37,7 +37,19 @@ function doGet() {
     else no += 1;
   });
 
-  return json_({ heads: heads, maybe: maybe, no: no, replies: Object.keys(latest).length });
+  // the page also renders the guest list, so send the names back
+  var list = Object.keys(latest).map(function (k) {
+    var r = latest[k];
+    return {
+      name: String(r[1] || ''),
+      status: String(r[2] || 'yes').toLowerCase(),
+      guests: Number(r[3]) || 0,
+      bring: String(r[4] || ''),
+      at: r[0] ? new Date(r[0]).getTime() : 0
+    };
+  }).sort(function (a, b) { return a.at - b.at; });
+
+  return json_({ heads: heads, maybe: maybe, no: no, replies: list.length, list: list });
 }
 
 // The page posts one RSVP here.

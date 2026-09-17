@@ -377,15 +377,14 @@ const PARTY = {
   slideSeconds: 4,
   // Paste the Google Apps Script web-app URL here (ends in /exec).
   // Empty string = RSVPs save on the guest's own phone only.
-  sheetUrl: '',
+  sheetUrl: 'https://script.google.com/macros/s/AKfycbz1B0TBGZywGxg1GcZjPITeDsSSbFL5vy9ZKMbvgwx-h98SN8nYZag1xJqcKJjPt3o/exec',
   clips: [
     { src: 'assets/clip-1-drone.mp4',      start: 0,   secs: 4.4, pan: true },
     { src: 'assets/clip-2-blueangels.mp4', start: 0,   secs: 6.6 },
     { src: 'assets/clip-3-dusk.mp4',       start: 0,   secs: 9 },
     { src: 'assets/clip-5-ba.mp4',         start: 0,   secs: 9 },
     { src: 'assets/clip-6-deck2.mp4',      start: 0,   secs: 4.2 },
-    { src: 'assets/clip-7-zoomout.mp4',    start: 0,   secs: 3.4, pan: true },
-    { src: 'assets/clip-8-rise.mp4',       start: 0,   secs: 5.2, pan: true }
+    { src: 'assets/clip-7-zoomout.mp4',    start: 0,   secs: 3.4, pan: true }
   ],
   captions: [
     'Coming in over the roof',
@@ -393,8 +392,7 @@ const PARTY = {
     'Dusk on the deck',
     'The Blue Angels, low over the bay',
     'Up on the deck',
-    'Pulling back over the roof',
-    'Up toward the sun'
+    'Pulling back over the roof'
   ]
 };
 
@@ -754,7 +752,13 @@ class Component extends DCLogic {
     if (!this.endpoint) return;
     fetch(this.endpoint + '?v=' + Date.now())
       .then(res => res.json())
-      .then(d => { if (d && typeof d.heads === 'number') this.setState({ tally: d, sending: false }); })
+      .then(d => {
+        if (!d || typeof d.heads !== 'number') return;
+        const next = { tally: d, sending: false };
+        // the sheet is the shared source of truth for the guest list
+        if (Array.isArray(d.list)) next.rsvps = d.list;
+        this.setState(next);
+      })
       .catch(() => {});
   }
 
@@ -765,7 +769,13 @@ class Component extends DCLogic {
     this.setState({ sending: true });
     fetch(this.endpoint, { method: 'POST', body: JSON.stringify(entry), headers: { 'Content-Type': 'text/plain;charset=utf-8' } })
       .then(res => res.json())
-      .then(d => { if (d && typeof d.heads === 'number') this.setState({ tally: d }); this.setState({ sending: false }); })
+      .then(d => {
+        if (d && typeof d.heads === 'number') {
+          const next = { tally: d, sending: false };
+          if (Array.isArray(d.list)) next.rsvps = d.list;
+          this.setState(next);
+        } else this.setState({ sending: false });
+      })
       .catch(() => this.setState({ sending: false, sendFailed: true }));
   }
 
