@@ -64,7 +64,7 @@
 
   <sc-if value="{{ splashOn }}" hint-placeholder-val="{{ true }}">
     <div data-no-wiggle="" style="{{ splashStyle }}">
-      <div style="position:absolute;inset:0;overflow:hidden;background:#3f7fb4 url('assets/splash-frame.jpg') center 26%/cover no-repeat"><video src="assets/hero-blueangels.mp4?v=2" poster="assets/splash-frame.jpg" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" style="width:100%;height:100%;object-fit:cover;object-position:50% 26%"></video></div>
+      <div style="position:absolute;inset:0;overflow:hidden;background:#3f7fb4 url('assets/splash-frame.jpg') center 26%/cover no-repeat"><video src="assets/hero-blueangels.mp4?v=3" poster="assets/splash-frame.jpg" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" style="width:100%;height:100%;object-fit:cover;object-position:50% 26%"></video></div>
       <div style="position:relative;width:100%;max-width:480px;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-6)">
         <div style="display:flex;justify-content:center;align-items:center;width:100%;font-family:'Bungee',sans-serif;font-size:calc((min(100vw, 480px) - 40px)/17.2);letter-spacing:.01em;white-space:nowrap;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 2px rgba(18,17,16,.9);-webkit-text-stroke:0.6px rgba(18,17,16,.95);paint-order:stroke fill">
           <span style="color:var(--color-accent-400);flex:none">/</span>
@@ -107,11 +107,12 @@
 
   <div data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
     <div ref="{{ stackRef }}" data-no-wiggle="" style="position:absolute;inset:-6% -4%;will-change:transform">
-      <div style="{{ l5 }}"><div style="position:absolute;inset:0;z-index:0;animation:panA 22s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/windows-frame.jpg') center/cover no-repeat"></div><video data-src="assets/hero-windows.mp4?v=2" data-start="0.14" data-slide="4" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l2 }}"><div style="position:absolute;inset:0;z-index:0;animation:panB 19s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/splash-frame.jpg') center/cover no-repeat"></div><video data-src="assets/hero-blueangels.mp4?v=2" data-start="0.14" data-slide="1" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l3 }}"><div style="position:absolute;inset:0;z-index:0;animation:panC 17s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/dk-frame.jpg') center/cover no-repeat"></div><video data-src="assets/hero-dk.mp4?v=4" data-start="0" data-min="8" data-slide="2" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l1 }}"><div style="position:absolute;inset:0;z-index:0;animation:panE 18s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/deck-1-daylight.jpeg') center/cover no-repeat"></div><video data-src="assets/hero-drone.mp4?v=11" data-slide="0" data-start="0.14" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
-      <div style="{{ l4 }}"><div style="position:absolute;inset:0;z-index:0;animation:panD 20s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/deck-7-dusk.jpeg') center/cover no-repeat"></div><video data-src="assets/hero-deck.mp4?v=2" data-start="0.14" data-slide="3" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="position:absolute;inset:0;z-index:0;animation:panA 26s cubic-bezier(.37,0,.63,1) infinite alternate;background:#20211f url('assets/deck-4-sunset.jpeg') center/cover no-repeat"></div>
+      <div style="{{ l5 }}"><video data-src="assets/hero-windows.mp4?v=4" data-start="0.14" data-slide="4" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l2 }}"><video data-src="assets/hero-blueangels.mp4?v=3" data-start="0.14" data-slide="1" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l3 }}"><video data-src="assets/hero-dk.mp4?v=6" data-start="0" data-min="8" data-slide="2" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l1 }}"><video data-src="assets/hero-drone.mp4?v=12" data-slide="0" data-start="0.14" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
+      <div style="{{ l4 }}"><video data-src="assets/hero-deck.mp4?v=3" data-start="0.14" data-slide="3" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></video></div>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #FAF9F500, #FAF9F500, #FAF9F500, #FAF9F500); pointer-events: none"></div>
     <audio ref="{{ trackRef }}" src="assets/party-track.mp3" loop="{{ true }}" preload="auto"></audio>
@@ -199,7 +200,7 @@
           <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35"><a href="#rsvp" style="color:var(--color-accent-400);text-decoration:none;border-bottom:1px solid var(--color-accent-700)">RSVP to get the address</a></p>
         </sc-if>
         <sc-if value="{{ addressKnown }}">
-          <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35"><a href="https://maps.google.com/?q=40+Edith+Street+San+Francisco" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--color-divider)">40 Edith Street #4<br>San Francisco</a></p>
+          <p style="margin:0;font-size:14px;font-weight:600;line-height:1.35"><a href="https://www.google.com/maps/search/?api=1&amp;query=40%20Edith%20Street%20%234%2C%20San%20Francisco%2C%20CA%2094133" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--color-divider)">40 Edith Street #4<br>San Francisco</a></p>
         </sc-if>
       </div>
       <div data-reveal="" style="padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider);border-right:1px solid var(--color-divider)">
@@ -265,7 +266,7 @@
           <sc-if value="{{ addressKnown }}">
             <div style="width:100%;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:var(--space-4) 0;margin:var(--space-2) 0;animation:rise .8s .15s both">
               <h6 style="margin:0 0 6px;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:22px;line-height:1.08;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">Here's where</h6>
-              <p style="margin:0;font-size:19px;font-weight:700;line-height:1.3"><a href="https://maps.google.com/?q=40+Edith+Street+San+Francisco" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--color-accent-400)">40 Edith Street #4</a><br>San Francisco, CA 94133</p>
+              <p style="margin:0;font-size:19px;font-weight:700;line-height:1.3"><a href="https://www.google.com/maps/search/?api=1&amp;query=40%20Edith%20Street%20%234%2C%20San%20Francisco%2C%20CA%2094133" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--color-accent-400)">40 Edith Street #4</a><br>San Francisco, CA 94133</p>
               <p style="margin:8px 0 0;font-size:13.5px;line-height:1.5;color:var(--color-neutral-700)">{{ doorLine }}</p>
             </div>
           </sc-if>
@@ -390,7 +391,7 @@ const PARTY = {
 };
 
 class Component extends DCLogic {
-  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', soundOn: false, videoBlocked: false, videoPlaying: false, rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
+  state = { loading: true, splashGone: false, pa: 0, pb: 0, winner: null, i: 0, name: '', status: 'yes', guests: 0, bring: '', soundOn: false, videoBlocked: false, videoPlaying: false, videoMode: false, rsvps: [], mine: null, editing: false, error: '', shared: false, tally: null, sending: false, sendFailed: false };
   stackRef = React.createRef();
   titleRef = React.createRef();
   bandRef = React.createRef();
@@ -419,6 +420,25 @@ class Component extends DCLogic {
       const raw = localStorage.getItem(this.key);
       if (raw) { const d = JSON.parse(raw); this.setState({ rsvps: d.rsvps || [], mine: d.mine || null }); }
     } catch (e) {}
+    // Kick every clip once the splash lifts. Desktop and most phones allow muted
+    // inline playback with no gesture at all; the tap is only a fallback.
+    this.autoKick = setInterval(() => {
+      const vids = Array.from(document.querySelectorAll('video'));
+      if (!vids.length) return;
+      vids.forEach(v => {
+        v.muted = true; v.defaultMuted = true; v.playsInline = true;
+        v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+        const src = v.dataset.src;
+        if (src && v.getAttribute('src') !== src) v.setAttribute('src', src);
+      });
+      if (!this.state.splashGone || !this.state.videoMode) return;
+      const act = vids.find(v => Number(v.dataset.slide) === this.state.i);
+      if (act && act.paused) {
+        const pr = act.play();
+        if (pr && pr.then) pr.then(() => this.setState({ videoPlaying: true, videoBlocked: false })).catch(() => {});
+      }
+      if (this.state.videoPlaying) { clearInterval(this.autoKick); this.autoKick = null; }
+    }, 600);
     this.fetchTally();
     this.tallyTimer = setInterval(() => this.fetchTally(), 45000);
 
@@ -515,6 +535,7 @@ class Component extends DCLogic {
         this.setState({ loading: false, winner: this.first });
         setTimeout(() => {
           this.setState({ splashGone: true, i: 0 });
+          this.playing = null;
           const v = document.querySelector('video[data-slide="0"]');
           if (v) { try { v.currentTime = 0; v.play(); } catch (e) {} }
           this.startCarousel();
@@ -528,7 +549,11 @@ class Component extends DCLogic {
     this.splashCap = setTimeout(() => {
       if (this.state.splashGone) return;
       this.setState({ loading: false, winner: this.first || this.winnerIs });
-      setTimeout(() => { this.setState({ splashGone: true, i: 0 }); this.startCarousel(); }, 700);
+      setTimeout(() => {
+        this.setState({ splashGone: true, i: 0 });
+        this.playing = null;
+        this.startCarousel();
+      }, 700);
     }, 7000);
 
     this.secs = Number(this.props.slideSeconds ?? PARTY.slideSeconds) * 1000;
@@ -630,6 +655,7 @@ class Component extends DCLogic {
     });
     this.videos = videos;
     this.timer = setInterval(() => {
+      if (!this.state.videoMode) return;
       this.syncVideos();
       const held = performance.now() - (this.lastAdvance || 0);
       if (held < 1500) return;                       // cooldown: never two hand-overs in a row
@@ -645,6 +671,9 @@ class Component extends DCLogic {
       if (!v.paused && isFinite(left) && left > 0 && left < 1.3 && nextReady) { this.advance(); return; }
       // watchdog: a refused or stalled clip must never freeze the hero
       const budget = ((isFinite(v.duration) && v.duration ? v.duration : 5) * 1000) + 2600;
+      // Before anything has ever played, hold the slide and let the play button
+      // stand — don't march through stills.
+      if (!this.everPlayed) { if (this.state.videoPlaying) this.everPlayed = true; else return; }
       if (v.paused && held > 3200) this.advance();
       else if (held > budget) this.advance();
     }, 250);
@@ -676,11 +705,14 @@ class Component extends DCLogic {
         v.dataset.fadeOut = '';
         const from = Number(v.dataset.start || 0);
         if (this.playing !== v) { this.playing = v; try { v.currentTime = from; } catch (e) {} }
+        // a clip that ran to its end behind the splash sits on its last frame
+        if (v.paused && isFinite(v.duration) && v.currentTime >= v.duration - 0.25) { try { v.currentTime = from; } catch (e) {} }
         // preload="none" never fetches until asked — kick it off
         if (v.readyState < 2 && !v.dataset.kicked && v.getAttribute('src')) { v.dataset.kicked = '1'; try { v.load(); } catch (e) {} }
         // a clip left sitting on its last frame has to be rewound before it can play again
         if (v.paused && v.duration && v.currentTime >= v.duration - 0.08) { try { v.currentTime = from; } catch (e) {} }
-        if (!v.paused && v.currentTime > 0.12 && !this.state.videoPlaying) this.setState({ videoPlaying: true });
+        const live = !v.paused && v.currentTime > 0.12 && v.readyState >= 2;
+        if (live !== this.state.videoPlaying) this.setState({ videoPlaying: live });
         if (v.paused) {
           const pr = v.play();
           if (pr && pr.then) pr.then(() => { if (this.state.videoBlocked) this.setState({ videoBlocked: false }); })
@@ -704,6 +736,7 @@ class Component extends DCLogic {
     clearTimeout(this.fallback);
     clearInterval(this.tallyTimer);
     clearInterval(this.bgKick);
+    clearInterval(this.autoKick);
     clearTimeout(this.splashCap);
     clearTimeout(this.splashCap);
     cancelAnimationFrame(this.raceRaf);
@@ -789,9 +822,10 @@ class Component extends DCLogic {
     const tMaybe = this.state.tally ? (this.state.tally.maybe || 0) : maybe;
     const order = { yes: 0, maybe: 1, no: 2 };
     const label = { yes: 'Yes', maybe: 'Maybe', no: "Can't" };
+    const vmode = this.state.videoMode;
     const layer = n => 'position:absolute;inset:0;overflow:hidden;will-change:opacity;z-index:' + (n === i ? 2 : 1) +
       ';transition:opacity 1200ms cubic-bezier(.45,0,.55,1);opacity:' +
-      (n === i ? 1 : 0) + (gray ? ';filter:grayscale(1) contrast(1.08)' : '');
+      (vmode && n === i ? 1 : 0) + (gray ? ';filter:grayscale(1) contrast(1.08)' : '');
     const tagStyle = st => "display:inline-flex;align-items:center;font-family:'Bungee',sans-serif;font-size:9.5px;text-transform:uppercase;padding:3px 9px;flex:none;" +
       (st === 'yes' ? 'background:var(--color-accent-400);color:var(--color-neutral-900)'
         : st === 'maybe' ? 'background:var(--color-accent-200);color:var(--color-accent-800)'
@@ -856,23 +890,34 @@ class Component extends DCLogic {
       trailB: trail(pb, this.rB ? this.rB.ph : 2.1),
       raceLine: winner ? (winner === 'Trev' ? 'Trev takes it' : 'André takes it') : 'Hold tight',
       trackRef: this.trackRef,
-      // shown on landing and until a clip is actually running
-      showPlay: !this.state.videoPlaying,
+      showPlay: !this.state.videoMode,
       playBtn: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:16px;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .6s ease;opacity:' +
-        (this.state.videoPlaying ? 0 : 1),
+        (this.state.videoMode ? 0 : 1),
       tapToPlay: e => {
         // the button sits inside the hero, whose click advances the slide — that
         // was swapping away the clip the tap just started
         if (e) { if (e.stopPropagation) e.stopPropagation(); if (e.preventDefault) e.preventDefault(); }
         // iOS allows ONE video to start per gesture, and only synchronously:
         // start the active clip first, before anything async touches it
-        const a0 = document.querySelector('video[data-slide="' + this.state.i + '"]');
-        if (a0) {
-          a0.muted = true; a0.defaultMuted = true; a0.playsInline = true;
-          a0.setAttribute('muted',''); a0.setAttribute('playsinline',''); a0.setAttribute('webkit-playsinline','');
-          const pr = a0.play();
-          if (pr && pr.then) pr.then(() => this.setState({ videoPlaying: true, videoBlocked: false })).catch(() => {});
-        }
+        const all = Array.from(document.querySelectorAll('video'));
+        const cur = this.state.i;
+        all.forEach(v => {
+          v.muted = true; v.defaultMuted = true; v.playsInline = true;
+          v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+          const src = v.dataset.src;
+          if (src && v.getAttribute('src') !== src) v.setAttribute('src', src);
+          try { v.currentTime = Number(v.dataset.start || 0); } catch (e) {}
+          const pr = v.play();
+          if (pr && pr.then) pr.then(() => {
+            if (v.dataset.slide === undefined) return;                 // splash clip keeps running
+            if (Number(v.dataset.slide) === cur) this.setState({ videoPlaying: true, videoBlocked: false });
+            else v.pause();                                            // unlocked, now resting
+          }).catch(() => {});
+        });
+        this.unlocked = true;
+        this.setState({ videoMode: true, i: 0 });
+        this.everPlayed = true;
+        this.startCarousel();
         this.lastAdvance = performance.now();
         this.startTrack();
         this.setState({ videoBlocked: false });
