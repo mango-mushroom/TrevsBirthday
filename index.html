@@ -293,12 +293,12 @@
       </span>
       <span style="{{ orbitCrescent }}">
         <svg viewBox="0 0 200 200" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 1px 3px rgba(18,17,16,.45))">
-          <path d="M100 1 A99 99 0 0 1 199.5 106" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="70 26 42 18"></path>
+          <path d="M100 1 A99 99 0 0 1 199.5 106" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linecap="round" stroke-dasharray="70 26 42 18"></path>
         </svg>
       </span>
       <span style="{{ orbitLong }}">
         <svg viewBox="0 0 200 200" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 2px 4px rgba(18,17,16,.5))">
-          <circle cx="100" cy="100" r="99" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="66 24 46 20"></circle>
+          <circle cx="100" cy="100" r="99" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.6" stroke-linecap="round" stroke-linecap="round" stroke-dasharray="66 24 46 20"></circle>
         </svg>
       </span>
       <span style="{{ orbitD }}">
@@ -375,7 +375,7 @@
     <div data-reveal="" style="padding:var(--space-6) var(--space-4) var(--space-6)">
       <h6 style="margin:0 0 var(--space-2);font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:28px;line-height:1.06;text-transform:uppercase;color:var(--color-accent-400);-webkit-text-stroke:0.4px rgba(18,17,16,.92);paint-order:stroke fill;text-shadow:0 0 1px rgba(18,17,16,.45), 0 1px 1px rgba(18,17,16,.3);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision">WHAT?</h6>
       <p style="margin:0;font-size:17px;line-height:1.55;font-weight:500;text-wrap:pretty">It's Trev's 40th birthday, its Fleet Weekend, and it's summer time in the Bay, all on Andre's giant fucking roof deck!!!!!!!!!!</p>
-      <p style="margin:var(--space-3) 0 0;font-size:15px;line-height:1.6;color:var(--color-neutral-700);text-wrap:pretty">Stop by for the airshow 2-4pm, or stay for the whole shebang through sunset!!!</p>
+      <p style="margin:var(--space-3) 0 0;font-size:15px;line-height:1.6;color:var(--color-neutral-700);text-wrap:pretty">Stop by for an hour for the airshow, or stay for the whole shebang!!!</p>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--color-divider)">
@@ -600,10 +600,10 @@ class Component extends DCLogic {
   get key() { return 'roofdeck:' + PARTY.id; }
 
   componentDidMount() {
-    // every touch is a fresh gesture — keep retrying muted VIDEO playback on each one.
-    // The music is never started here: it begins only when the play button is pressed.
+    // every touch is a fresh gesture — keep trying to start playback on each one
     ['touchstart', 'pointerdown', 'keydown'].forEach(ev =>
       window.addEventListener(ev, () => {
+        this.startTrack();
         const act = this.heroRef && this.heroRef.current;
         if (this.state.videoMode && act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
       }, { passive: true }));
@@ -623,23 +623,18 @@ class Component extends DCLogic {
       const vids = Array.from(document.querySelectorAll('video'));
       if (!vids.length) return;
       vids.forEach(v => {
-        if (!v.hasAttribute('playsinline')) {
-          v.muted = true; v.defaultMuted = true; v.playsInline = true;
-          v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
-        }
+        v.muted = true; v.defaultMuted = true; v.playsInline = true;
+        v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
         const src = v.dataset.src;
         if (src && v.getAttribute('src') !== src) v.setAttribute('src', src);
       });
       if (!this.state.splashGone || !this.state.videoMode) return;
-      const act = this.els()[this.state.slot];
-      if (act && !act.paused) { clearInterval(this.autoKick); this.autoKick = null; return; }
-      if (act && act.paused && this.state.playing) {
+      const act = vids.find(v => Number(v.dataset.slide) === this.state.i);
+      if (act && act.paused) {
         const pr = act.play();
-        if (pr && pr.then) pr.then(() => {
-          this.setState({ videoPlaying: true, videoBlocked: false });
-          clearInterval(this.autoKick); this.autoKick = null;
-        }).catch(() => {});
+        if (pr && pr.then) pr.then(() => this.setState({ videoPlaying: true, videoBlocked: false })).catch(() => {});
       }
+      if (this.state.videoPlaying) { clearInterval(this.autoKick); this.autoKick = null; }
     }, 600);
     try { if (localStorage.getItem(this.key + ':pressed-v3')) this.setState({ everPressed: true }); } catch (err) {}
     this.fetchTally();
@@ -833,7 +828,6 @@ class Component extends DCLogic {
     const to = gesture ? 0 : 1 - this.state.slot;
     const el = els[to];
     this.lastAdvance = performance.now();
-    this.stallTries = 0;
     this.prep(el, clip);
     try { el.currentTime = clip.start || 0; } catch (e) {}
     el.style.animation = 'none';
@@ -844,27 +838,20 @@ class Component extends DCLogic {
     if (p && p.then) p.then(() => {
       if (Math.abs(el.currentTime - (clip.start || 0)) > 0.4) { try { el.currentTime = clip.start || 0; } catch (e) {} }
       this.setState({ videoBlocked: false });
-    }).catch(() => {
-      // mobile can refuse the handover while the outgoing clip still holds a decoder
-      const other = this.els()[1 - to];
-      if (other && !other.paused) other.pause();
-      const again = el.play();
-      if (again && again.catch) again.catch(() => this.setState({ videoBlocked: true }));
-    });
+    }).catch(() => this.setState({ videoBlocked: true }));
     this.setState({ i: n, slot: to });
     // rest the outgoing element once the fade is done, and queue the next clip on it
     clearTimeout(this.restTimer);
     this.restTimer = setTimeout(() => {
       const other = this.els()[1 - to];
       if (other) { other.pause(); this.prep(other, PARTY.clips[(n + 1) % PARTY.clips.length]); }
-    }, gesture ? 3000 : 1100);
+    }, 1100);
   }
 
   startTrack() {
     const a = this.trackRef && this.trackRef.current;
     if (!a) return;
     if (this.trackStarted) { if (!a.paused && !a.muted && !this.state.soundOn) this.setState({ soundOn: true }); return; }
-    if (!a.paused) { this.trackStarted = true; return; }   // already running: don't stack a second play()
     this.trackStarted = true;
     a.volume = 0;
     const seekIn = () => { try { if (a.seekable.length && a.seekable.end(0) > 45) a.currentTime = 42; } catch (e) {} };
@@ -899,17 +886,7 @@ class Component extends DCLogic {
       const held = performance.now() - (this.lastAdvance || 0);
       if (clip.secs && el.currentTime - (clip.start || 0) >= clip.secs) this.advance();
       else if (!clip.secs && isFinite(el.duration) && el.duration && el.duration - el.currentTime <= 1.0 && held > 1500) this.advance();
-      else if (el.paused) {
-        this.stallTries = (this.stallTries || 0) + 1;
-        if (this.stallTries === 1 || this.stallTries % 4 === 0) {
-          const other = this.els()[1 - this.state.slot];
-          if (other && !other.paused) other.pause();   // free the second decoder for iOS
-          el.muted = true; el.playsInline = true;
-          const p = el.play();
-          if (p && p.catch) p.catch(() => {});
-        }
-        if (this.stallTries > 26) this.advance();      // ~2.6s of failed retries
-      }
+      else if (el.paused && held > 3500) this.advance();
       else if (isFinite(el.duration) && el.duration && held > el.duration * 1000 + 3000) this.advance();
     }, 100);
   }
@@ -1296,8 +1273,8 @@ class Component extends DCLogic {
           this.everPlayed = true;
           try { if (this.userGesture) localStorage.setItem(this.key + ':pressed-v3', '1'); } catch (err) {}
           this.goClip(0, true);
-          if (au) au.muted = false;
-          this.startTrack();   // owns play() and the fade-in to the dial volume
+          this.startTrack();
+          if (au) { au.muted = false; au.volume = this.state.vol; }
           return;
         }
         if (this.state.playing) {
