@@ -600,10 +600,10 @@ class Component extends DCLogic {
   get key() { return 'roofdeck:' + PARTY.id; }
 
   componentDidMount() {
-    // every touch is a fresh gesture — keep trying to start playback on each one
+    // every touch is a fresh gesture — keep retrying muted VIDEO playback on each one.
+    // The music is never started here: it begins only on the play button.
     ['touchstart', 'pointerdown', 'keydown'].forEach(ev =>
       window.addEventListener(ev, () => {
-        this.startTrack();
         const act = this.heroRef && this.heroRef.current;
         if (this.state.videoMode && act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
       }, { passive: true }));
@@ -852,6 +852,7 @@ class Component extends DCLogic {
     const a = this.trackRef && this.trackRef.current;
     if (!a) return;
     if (this.trackStarted) { if (!a.paused && !a.muted && !this.state.soundOn) this.setState({ soundOn: true }); return; }
+    if (!a.paused) { this.trackStarted = true; return; }   // already running: never stack a second play()
     this.trackStarted = true;
     a.volume = 0;
     const seekIn = () => { try { if (a.seekable.length && a.seekable.end(0) > 45) a.currentTime = 42; } catch (e) {} };
@@ -1273,8 +1274,8 @@ class Component extends DCLogic {
           this.everPlayed = true;
           try { if (this.userGesture) localStorage.setItem(this.key + ':pressed-v3', '1'); } catch (err) {}
           this.goClip(0, true);
-          this.startTrack();
-          if (au) { au.muted = false; au.volume = this.state.vol; }
+          if (au) au.muted = false;
+          this.startTrack();   // owns play() and the fade-in
           return;
         }
         if (this.state.playing) {
