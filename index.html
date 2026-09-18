@@ -17,13 +17,13 @@
   <meta property="og:title" content="Trev's 40th Birthday">
   <meta property="og:description" content="André's roof deck · Fleet Weekend · Friday, October 9, 2026 · 1 PM till sunset. RSVP here.">
   <meta property="og:url" content="https://mango-mushroom.github.io/TrevsBirthday/">
-  <meta property="og:image" content="https://mango-mushroom.github.io/TrevsBirthday/og-preview-3.png">
+  <meta property="og:image" content="https://mango-mushroom.github.io/TrevsBirthday/og-preview-4.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Trev's 40th Birthday">
   <meta name="twitter:description" content="André's roof deck · Fleet Weekend · Oct 9, 2026 · 1 PM till sunset">
-  <meta name="twitter:image" content="https://mango-mushroom.github.io/TrevsBirthday/og-preview-3.png">
+  <meta name="twitter:image" content="https://mango-mushroom.github.io/TrevsBirthday/og-preview-4.jpg">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&amp;family=Bungee:wght@400&amp;family=Archivo:wght@400;500;600;800&amp;display=swap">
   <style>
@@ -157,7 +157,7 @@
       100% { transform: scale(1.18) translate3d(7%, 2.5%, 0); }
     }
     @keyframes panStill { from { transform: scale(1.04) translate3d(-2%, 1%, 0); } to { transform: scale(1.12) translate3d(2%, -1.5%, 0); } }
-    @keyframes panX { from { object-position: 50% 50%; } to { object-position: 74% 50%; } }
+    @keyframes panX { from { object-position: 16% 50%; } to { object-position: 84% 50%; } }
     @keyframes flow { from { background-position: 0 50%; } to { background-position: 260px 50%; } }
     @keyframes fizz { from { background-position: 0 0, 0 0; } to { background-position: -150px 0, 96px 0; } }
   </style>
@@ -210,7 +210,7 @@
 
   <div data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
     <div ref="{{ stackRef }}" data-no-wiggle="" style="position:absolute;inset:-6% -4%;will-change:transform">
-      <div style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#20211f"><img src="assets/hero-still.jpg" alt="The roof deck at sunset over North Beach and the bay" style="width:100%;height:100%;object-fit:cover;animation:panArc 19s linear infinite alternate"></div>
+      <div style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#20211f"><img src="assets/hero-still-v2.jpg" alt="The roof deck at sunset over North Beach and the bay" style="width:100%;height:100%;object-fit:cover;animation:panArc 19s linear infinite alternate"></div>
       <div style="{{ layerA }}"><video ref="{{ heroRef }}" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="width:100%;height:100%;object-fit:cover"></video></div>
       <div style="{{ layerB }}"><video ref="{{ heroRefB }}" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="width:100%;height:100%;object-fit:cover"></video></div>
     </div>
@@ -574,7 +574,7 @@ const PARTY = {
   sheetUrl: 'https://script.google.com/macros/s/AKfycbz1B0TBGZywGxg1GcZjPITeDsSSbFL5vy9ZKMbvgwx-h98SN8nYZag1xJqcKJjPt3o/exec',
   // Fixed running order; each clip plays in full (no `secs` cap), then loops to the first.
   clips: [
-    { src: 'assets/clip-7-zoomout.mp4',    start: 0 },
+    { src: 'assets/clip-7-zoomout.mp4',    start: 0, pan: true },
     { src: 'assets/clip-2-blueangels.mp4', start: 0 },
     { src: 'assets/clip-3-dusk.mp4',       start: 0 },
     { src: 'assets/clip-4-ba.mp4',         start: 0 },
@@ -832,7 +832,7 @@ class Component extends DCLogic {
     try { el.currentTime = clip.start || 0; } catch (e) {}
     el.style.animation = 'none';
     void el.offsetWidth;
-    el.style.objectPosition = '50% 50%';
+    el.style.objectPosition = clip.pan ? '16% 50%' : '50% 50%';
     el.style.animation = clip.pan ? 'panX ' + (clip.secs || (isFinite(el.duration) && el.duration) || 6).toFixed(1) + 's cubic-bezier(.33,0,.67,1) both' : 'none';
     const p = el.play();
     if (p && p.then) p.then(() => {
