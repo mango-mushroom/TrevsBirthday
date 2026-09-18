@@ -833,6 +833,7 @@ class Component extends DCLogic {
     const to = gesture ? 0 : 1 - this.state.slot;
     const el = els[to];
     this.lastAdvance = performance.now();
+    this.stallTries = 0;
     this.prep(el, clip);
     try { el.currentTime = clip.start || 0; } catch (e) {}
     el.style.animation = 'none';
@@ -843,7 +844,13 @@ class Component extends DCLogic {
     if (p && p.then) p.then(() => {
       if (Math.abs(el.currentTime - (clip.start || 0)) > 0.4) { try { el.currentTime = clip.start || 0; } catch (e) {} }
       this.setState({ videoBlocked: false });
-    }).catch(() => this.setState({ videoBlocked: true }));
+    }).catch(() => {
+      // mobile can refuse the handover while the outgoing clip still holds a decoder
+      const other = this.els()[1 - to];
+      if (other && !other.paused) other.pause();
+      const again = el.play();
+      if (again && again.catch) again.catch(() => this.setState({ videoBlocked: true }));
+    });
     this.setState({ i: n, slot: to });
     // rest the outgoing element once the fade is done, and queue the next clip on it
     clearTimeout(this.restTimer);
@@ -892,7 +899,17 @@ class Component extends DCLogic {
       const held = performance.now() - (this.lastAdvance || 0);
       if (clip.secs && el.currentTime - (clip.start || 0) >= clip.secs) this.advance();
       else if (!clip.secs && isFinite(el.duration) && el.duration && el.duration - el.currentTime <= 1.0 && held > 1500) this.advance();
-      else if (el.paused && held > 3500) this.advance();
+      else if (el.paused) {
+        this.stallTries = (this.stallTries || 0) + 1;
+        if (this.stallTries === 1 || this.stallTries % 4 === 0) {
+          const other = this.els()[1 - this.state.slot];
+          if (other && !other.paused) other.pause();   // free the second decoder for iOS
+          el.muted = true; el.playsInline = true;
+          const p = el.play();
+          if (p && p.catch) p.catch(() => {});
+        }
+        if (this.stallTries > 26) this.advance();      // ~2.6s of failed retries
+      }
       else if (isFinite(el.duration) && el.duration && held > el.duration * 1000 + 3000) this.advance();
     }, 100);
   }
