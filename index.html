@@ -248,7 +248,7 @@
     <audio ref="{{ trackRef }}" src="assets/party-track-loop.mp3" loop="{{ true }}" preload="none"></audio>
     <div data-dial="" onPointerOver="{{ showDial }}" onPointerOut="{{ restDial }}" style="{{ deckStyle }}">
       <div onPointerDown="{{ volDown }}" onPointerMove="{{ volMove }}" onPointerUp="{{ volUp }}" onPointerCancel="{{ volUp }}" onClick="{{ swallow }}" role="slider" aria-label="Music volume" aria-valuenow="{{ volPct }}" style="position:absolute;inset:0;border-radius:50%;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent"></div>
-      <svg viewBox="0 0 200 200" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:rotate(-90deg)">
+      <svg viewBox="0 0 200 200" aria-hidden="true" style="{{ volRingStyle }}">
         <circle cx="100" cy="100" r="98" fill="none" stroke="rgba(78,155,232,.42)" stroke-width="1.1" stroke-dasharray="5 27" stroke-linecap="round" style="transform-origin:100px 100px;filter:drop-shadow(0 0 2.5px rgba(255,255,255,.7));animation:spinCCW 63s linear infinite"></circle>
         <sc-for list="{{ volSegs }}" as="seg" hint-placeholder-count="0">
           <path d="{{ seg.d }}" fill="none" stroke="{{ seg.c }}" stroke-width="{{ seg.w }}" stroke-linecap="round" style="filter:drop-shadow(0 0 3px rgba(255,255,255,.85))"></path>
@@ -1263,7 +1263,7 @@ class Component extends DCLogic {
     const nest = base => (muted ? '50%' : base) + ';transition:inset .95s cubic-bezier(.34,1.56,.44,1)';
     const fade = launching
       ? ';transition:opacity 1.5s cubic-bezier(.6,0,1,1), filter 1.5s cubic-bezier(.6,0,1,1);opacity:0.04;filter:blur(2.5px)'
-      : ';transition:opacity 1.1s cubic-bezier(.45,0,.55,1), filter 1.1s ease;opacity:' + (dialOn ? 1 : 0) + ';filter:blur(0)';
+      : ';transition:opacity 1.1s cubic-bezier(.45,0,.55,1), filter 1.1s ease;opacity:' + (dialOn ? 1 : 0.22) + ';filter:blur(0)';
     // during launch every ring runs one long rotation on an ease-in curve
     const spin = (dir, d) => launching
       ? 'animation:launchSpin' + (dir === 'CCW' ? 'R' : '') + ' 1.55s cubic-bezier(.55,0,1,1) forwards'
@@ -1350,8 +1350,12 @@ class Component extends DCLogic {
       fadeOrbits: fade,
       deckStyle: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;width:min(38vw,190px);aspect-ratio:1;display:grid;place-items:center;' +
         'transition:opacity 1.2s cubic-bezier(.45,0,.55,1);opacity:1',
+      // the dashes and their track live in the deck, not volOverlay, so they need
+      // their own resting opacity — volOverlay only holds the knob and trail
+      volRingStyle: 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:rotate(-90deg);' +
+        'transition:opacity 1.2s cubic-bezier(.45,0,.55,1);opacity:' + (live && !dialOn ? 0.3 : 1),
       volOverlay: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:7;width:min(38vw,190px);aspect-ratio:1;pointer-events:none;' +
-        'transition:opacity 1.2s cubic-bezier(.45,0,.55,1);opacity:' + (playing ? 0.65 : 1),
+        'transition:opacity 1.2s cubic-bezier(.45,0,.55,1);opacity:' + (live && !dialOn ? 0.3 : 1),
       showDial: e => {
         if (e && e.stopPropagation) e.stopPropagation();
         clearTimeout(this.dialTimer);
@@ -1359,7 +1363,7 @@ class Component extends DCLogic {
       },
       restDial: () => {
         clearTimeout(this.dialTimer);
-        if (!this.state.playing) return;
+        if (!this.state.soundOn) return;
         this.dialTimer = setTimeout(() => this.setState({ dialShown: false }), 900);
       },
       // bounded on BOTH sides: left holds a guaranteed margin off the screen edge,
@@ -1439,7 +1443,7 @@ class Component extends DCLogic {
       vinylStyle: 'position:relative;width:44%;aspect-ratio:1;padding:0;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;' +
         '-webkit-tap-highlight-color:transparent;backdrop-filter:' + (dialOn ? 'blur(1.5px)' : 'none') + ';' +
         'background:' + (dialOn ? 'rgba(18,17,16,.07)' : 'transparent') + ';' +
-        'transition:opacity 1.1s cubic-bezier(.45,0,.55,1), background 1.1s ease;opacity:' + (dialOn ? 1 : 0.55),
+        'transition:opacity 1.1s cubic-bezier(.45,0,.55,1), background 1.1s ease;opacity:1',
 
       btnSpin: 'position:absolute;inset:0;pointer-events:none;animation:spinCW 8s linear infinite' + discFade,
       btnSpinBack: 'position:absolute;inset:14%;pointer-events:none' + discFade +
@@ -1448,12 +1452,14 @@ class Component extends DCLogic {
       springOn: this.state.spring ? '' : null,
       earthSpin: 'transform-origin:100px 100px;animation:orbitK ' + dur('19s') + ' linear infinite' +
         (launching ? ';animation-duration:1.6s' : ''),
-      orbitOverlay: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:8;width:min(38vw,190px);aspect-ratio:1;pointer-events:none',
+      orbitOverlay: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:8;width:min(38vw,190px);aspect-ratio:1;pointer-events:none;' +
+        'transition:opacity 1.2s cubic-bezier(.45,0,.55,1);opacity:1',
       orbitRef: this.orbitRef,
       fortyRef: this.fortyRef,
       // rides the volume ring itself: r=98 of the 200 viewBox, same as the knob
       trevOrbit: 'transform-origin:100px 100px;animation:orbitK ' + dur('19s') + ' linear infinite' +
-        (launching ? ';animation-duration:1.6s' : ''),
+        (launching ? ';animation-duration:1.6s' : '') +
+        ';transition:opacity 1.2s cubic-bezier(.45,0,.55,1);opacity:' + (live && !dialOn ? 0 : 1),
       // exact counter-rotation about his own centre, so the face never tips
       trevFaceSpin: 'transform-origin:100px 2px;animation:orbitKBack ' + dur('19s') + ' linear infinite' +
         (launching ? ';animation-duration:1.6s' : ''),
@@ -1512,6 +1518,15 @@ class Component extends DCLogic {
       swallow: e => { if (e && e.stopPropagation) e.stopPropagation(); },
 
       togglePlay: e => {
+        if (e) { if (e.stopPropagation) e.stopPropagation(); if (e.preventDefault) e.preventDefault(); }
+        // pointerdown and click can both land in one press. EVERYTHING below
+        // flips state, so the guard has to come first — a second entry used to
+        // re-run the dial block against the already-flipped soundOn and cancel
+        // the settle, leaving the widget bright for the rest of the session.
+        if (this.toggling) return;
+        this.toggling = true;
+        setTimeout(() => { this.toggling = false; }, 320);
+        const soundWasOn = !!this.state.soundOn;
         clearTimeout(this.launchTimer);
         clearTimeout(this.springTimer);
         this.setState({ spring: false });
@@ -1519,23 +1534,18 @@ class Component extends DCLogic {
           this.setState({ spring: true });
           this.springTimer = setTimeout(() => this.setState({ spring: false }), 1100);
         });
-        if (this.state.videoMode && this.state.playing) {
-          // pausing: bring the dial straight back
+        if (soundWasOn) {
+          // switching sound OFF: bring the dial straight back
           clearTimeout(this.dialTimer);
           this.setState({ launch: false, dialShown: true });
         } else {
-          this.setState({ launch: !this.state.videoMode });
+          // switching sound ON: let the dial settle back out of the way
+          this.setState({ launch: !this.trackStarted });
           clearTimeout(this.dialTimer);
           this.launchTimer = setTimeout(() => {
             this.setState({ launch: false, dialShown: false });
-          }, this.state.videoMode ? 900 : 1600);
+          }, this.trackStarted ? 900 : 1600);
         }
-        if (e) { if (e.stopPropagation) e.stopPropagation(); if (e.preventDefault) e.preventDefault(); }
-        // pointerdown + click can both land in one press; state.playing is async,
-        // so a second entry would read a stale value and stop what it just started
-        if (this.toggling) return;
-        this.toggling = true;
-        setTimeout(() => { this.toggling = false; }, 320);
         const au = this.trackRef && this.trackRef.current;
         const el = this.els()[this.state.slot];
         // first press also unlocks iOS playback — must stay inside the gesture
