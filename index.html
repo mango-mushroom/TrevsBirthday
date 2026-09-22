@@ -609,13 +609,13 @@ class Component extends DCLogic {
     // The music is never started here: it begins only on the play button.
     ['touchstart', 'pointerdown', 'keydown'].forEach(ev =>
       window.addEventListener(ev, () => {
-        const act = this.heroRef && this.heroRef.current;
+        const act = this.liveEl;
         if (this.state.videoMode && act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
       }, { passive: true }));
     // a backgrounded tab pauses video; resume when they come back
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
-      const act = this.heroRef && this.heroRef.current;
+      const act = this.liveEl;
       if (this.state.videoMode && act && act.paused) { const p = act.play(); if (p && p.catch) p.catch(() => {}); }
     });
     try {
@@ -800,7 +800,8 @@ class Component extends DCLogic {
   }
 
   advance() {
-    if (this.handover) return;                                      // one already in flight
+    if (this.handover && performance.now() - (this.handoverAt || 0) < 10000) return;   // one in flight
+    this.handover = false;                                          // never latch shut
     if (performance.now() - (this.lastAdvance || 0) < 900) return;  // never two handovers in a row
     if (this.lite) {                                   // one clip, looped — no second download
       const el = this.els()[this.state.slot];
@@ -834,22 +835,20 @@ class Component extends DCLogic {
     return this._lite;
   }
 
+  // Load a clip onto an element, never start it. goClip is the only code that
+  // plays a hero element, so there is no self-starting playback to guard
+  // against — autoplay plus a pausing guard was the whole bug.
   prep(el, clip) {
     if (!el || !clip) return;
-    el.muted = true; el.defaultMuted = true; el.playsInline = true; el.autoplay = true;
+    el.muted = true; el.defaultMuted = true; el.playsInline = true;
+    el.autoplay = false; el.removeAttribute('autoplay');
     el.setAttribute('muted',''); el.setAttribute('playsinline',''); el.setAttribute('webkit-playsinline','');
     if (el.getAttribute('src') !== clip.src) { el.setAttribute('src', clip.src); try { el.load(); } catch (e) {} }
-    const seek = () => { try { el.currentTime = clip.start || 0; } catch (e) {} };
+    const seek = () => {
+      if (Math.abs(el.currentTime - (clip.start || 0)) <= 0.1) return;   // already there: a no-op seek still aborts a later play()
+      try { el.currentTime = clip.start || 0; } catch (e) {}
+    };
     if (el.readyState >= 1) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
-    if (!el.dataset.guard) {
-      el.dataset.guard = '1';
-      el.addEventListener('playing', () => {
-        if (this.els()[this.state.slot] === el || el.dataset.incoming) return;   // on screen, or still filling
-        el.pause();
-        const c = PARTY.clips[this.state.i] || {};
-        try { el.currentTime = c.start || 0; } catch (e) {}
-      });
-    }
   }
 
   // Play clip n on the idle element, then swap which layer is visible. Both
@@ -862,28 +861,32 @@ class Component extends DCLogic {
     const el = els[to];
     this.lastAdvance = performance.now();
     clearTimeout(this.waitTimer);
+    clearTimeout(this.retryTimer);
     this.handover = true;          // a handover is exclusive: nothing else may advance
-    el.dataset.incoming = '1';
-    this.prep(el, clip);
-    try { el.currentTime = clip.start || 0; } catch (e) {}
+    this.handoverAt = performance.now();
+    // The incoming element is pending, NOT live: during the readiness wait the
+    // element on screen is still the outgoing one, and liveEl must keep meaning
+    // "what the viewer is looking at". Clearing visibility here is safe.
+    this.pendingEl = el;
+    el.style.visibility = 'visible';
+    this.prep(el, clip);   // prep seeks to clip.start when needed; no bare seek here
 
     // Swapping on schedule is what freezes the reel on cellular: the incoming
     // element gets shown with nothing downloaded. Keep the outgoing clip on
     // screen and only cut when the next one can actually play through a second.
     const t0 = performance.now();
-    const swap = () => {
-      const waited = performance.now() - t0;
-      const ready = el.readyState >= 3 || this.buffered(el, clip.start || 0) >= 1.2;
-      if (!ready && waited < 9000) {
-        // some builds of iOS will not fill a paused element: nudge it
-        if (waited > 2200 && el.paused) { const k = el.play(); if (k && k.catch) k.catch(() => {}); }
-        this.lastAdvance = performance.now();
-        this.waitTimer = setTimeout(swap, 180);
-        return;
-      }
+    const start = () => {
       this.handover = false;
-      delete el.dataset.incoming;
-      try { el.currentTime = clip.start || 0; } catch (e) {}
+      this.queuedFor = null;
+      this.resumes = 0;
+      this.liveEl = el;            // now it is genuinely the one on screen
+      this.pendingEl = null;
+      // Assigning currentTime drops readyState to 1 and starts a seek; a play()
+      // issued into that seek is aborted and the element reverts to paused.
+      // Only seek when actually off-mark.
+      if (Math.abs(el.currentTime - (clip.start || 0)) > 0.1) {
+        try { el.currentTime = clip.start || 0; } catch (e) {}
+      }
       el.style.animation = 'none';
       void el.offsetWidth;
       el.style.objectPosition = '50% 50%';
@@ -892,19 +895,44 @@ class Component extends DCLogic {
       if (p && p.then) p.then(() => {
         if (Math.abs(el.currentTime - (clip.start || 0)) > 0.4) { try { el.currentTime = clip.start || 0; } catch (e) {} }
         this.setState({ videoBlocked: false });
-      }).catch(() => this.setState({ videoBlocked: true }));
+      }).catch(() => this.retryPlay(el));
       this.lastAdvance = performance.now();
-      this.queuedFor = null;
       this.setState({ i: n, slot: to });
       // rest the outgoing element once the fade is done; the next clip is not
       // fetched here — the ticker queues it when this one is fed
       clearTimeout(this.restTimer);
       this.restTimer = setTimeout(() => {
         const other = this.els()[1 - to];
-        if (other) other.pause();
+        const safe = other && other !== this.liveEl && other !== this.pendingEl
+                     && other !== this.els()[this.state.slot];
+        if (safe) { other.pause(); other.style.visibility = 'hidden'; }
       }, 1100);
     };
+    // wait for data, but ALWAYS start by the 9s cap — no path may hang
+    const swap = () => {
+      const waited = performance.now() - t0;
+      if (el.readyState >= 3 || this.buffered(el, clip.start || 0) >= 1.2 || waited >= 9000) return start();
+      this.lastAdvance = performance.now();
+      this.waitTimer = setTimeout(swap, 180);
+    };
     swap();
+  }
+
+  // A rejected play() heals itself: retry a few times, and only ask the viewer
+  // for a tap once the retries are exhausted.
+  retryPlay(el) {
+    clearTimeout(this.retryTimer);
+    this.retries = 0;
+    const again = () => {
+      if (el !== this.liveEl || !this.state.playing) return;
+      if (!el.paused) { if (this.state.videoBlocked) this.setState({ videoBlocked: false }); return; }
+      if (++this.retries > 4) { this.setState({ videoBlocked: true }); return; }   // cue asks for a tap
+      const p = el.play();
+      if (p && p.then) p.then(() => this.setState({ videoBlocked: false }))
+                        .catch(() => { this.retryTimer = setTimeout(again, 1500); });
+      else this.retryTimer = setTimeout(again, 1500);
+    };
+    this.retryTimer = setTimeout(again, 400);
   }
 
   startTrack() {
@@ -940,14 +968,35 @@ class Component extends DCLogic {
     this.els().forEach(v => {
       if (!v || v.dataset.wired) return;
       v.dataset.wired = '1';
-      const done = () => { if (this.state.videoMode && this.state.playing && v === this.els()[this.state.slot]) this.advance(); };
-      v.addEventListener('ended', done);
+      const done = () => { if (this.state.videoMode && this.state.playing && v === this.liveEl) this.advance(); };
+      v.addEventListener('ended', () => {
+        // An edit list makes duration overshoot the last real frame, so the gap
+        // to duration says nothing. Readiness does: data on hand + ended is a
+        // genuine end; only a starved element is worth refilling.
+        const starved = v.readyState < 3;
+        if (starved) { const k = v.play(); if (k && k.catch) k.catch(() => {}); return; }
+        done();
+      });
       v.addEventListener('error', done);
+      v.addEventListener('playing', () => {
+        if (v === this.liveEl && this.state.videoBlocked) this.setState({ videoBlocked: false });
+      });
+      v.addEventListener('pause', () => {
+        if (v !== this.liveEl || !this.state.playing || !this.state.videoMode || v.ended) return;
+        if (isFinite(v.duration) && v.duration && v.duration - v.currentTime <= 0.3) return;   // that IS the end
+        // Nothing should pause the visible clip mid-run. Resume rather than let
+        // the ticker read the pause as the end and skip the rest of the clip.
+        if ((this.resumes = (this.resumes || 0) + 1) > 6) return;
+        const p = v.play(); if (p && p.catch) p.catch(() => {});
+      });
     });
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       if (!this.state.videoMode || !this.state.playing) return;
-      if (this.handover) return;                    // waiting on the next clip's buffer
+      if (this.handover) {                          // waiting on the next clip's buffer
+        if (performance.now() - (this.handoverAt || 0) < 10000) return;
+        this.handover = false;                      // expired: never disable the reel for good
+      }
       const el = this.els()[this.state.slot];
       if (!el) return;
       const clip = PARTY.clips[this.state.i] || {};
@@ -960,24 +1009,35 @@ class Component extends DCLogic {
 
       // Fetch the next clip only once this one is fed — two clips downloading
       // at once is why the reel stalls on a phone.
-      if (!this.lite && this.queuedFor !== this.state.i
-          && (ahead > 3 || (isFinite(el.duration) && el.duration && el.duration - t < 3))) {
+      const whole = isFinite(el.duration) && el.duration && this.buffered(el, 0) >= el.duration - 0.35;
+      // held > 1400 keeps this clear of the 1000ms crossfade: the idle layer is
+      // still partly opaque during it, so a src swap there ghosts through
+      if (!this.lite && this.queuedFor !== this.state.i && held > 1400
+          && (whole || (isFinite(el.duration) && el.duration && el.duration - t < 2))) {
         this.queuedFor = this.state.i;
         const other = this.els()[1 - this.state.slot];
-        if (other) this.prep(other, PARTY.clips[(this.state.i + 1) % PARTY.clips.length]);
+        if (other && other !== this.pendingEl && other !== this.liveEl) this.prep(other, PARTY.clips[(this.state.i + 1) % PARTY.clips.length]);
       }
 
       if (clip.secs && t - (clip.start || 0) >= clip.secs) this.advance();
-      else if (!clip.secs && isFinite(el.duration) && el.duration && el.duration - t <= 1.0 && held > 1500) this.advance();
-      else if (el.paused && held > 3500) this.advance();
+      // A tight backstop only. 'ended' fires reliably at the true end (declared
+      // duration matches the sample table to within 1ms on every clip), and the
+      // readyState<3 test in the ended handler already sorts a real end from an
+      // underrun — so this must never pre-empt a clip.
+      else if (!clip.secs && isFinite(el.duration) && el.duration && el.duration - t <= 0.15 && held > 1500) this.advance();
+      // Only skip a paused clip that actually RAN. Without this, a blocked or
+      // decode-stalled element marches the reel through every clip at 3.5s
+      // intervals, fetching all of them while showing nothing.
+      else if (el.paused && t > (clip.start || 0) + 0.05 && held > 3500) this.advance();
       // a frozen picture is a refill, not a cue to skip: only move on if it has
       // been stuck ~6s with nothing arriving
-      else if (this.stuck > 60 && ahead < 0.3 && held > 6000) this.advance();
+      else if (this.stuck > 140 && ahead < 0.25 && held > 14000) this.advance();
+      else if (el.paused && t > (clip.start || 0) + 0.05 && isFinite(el.duration) && el.duration && held > el.duration * 1000 + 4000) this.advance();
     }, 100);
   }
 
   componentWillUnmount() {
-    clearTimeout(this.waitTimer); clearTimeout(this.trackWait); this.handover = false;
+    clearTimeout(this.waitTimer); clearTimeout(this.trackWait); clearTimeout(this.retryTimer); this.handover = false;
     clearInterval(this.timer);
     clearTimeout(this.fallback);
     clearInterval(this.tallyTimer);
@@ -1110,7 +1170,7 @@ class Component extends DCLogic {
     const launching = this.state.launch;
     const muted = vol < 0.02;
     const dialOn = !playing || !!this.state.dialShown;
-    const cueOn = !playing;   // the cues come back whenever the hero is stopped
+    const cueOn = !playing || this.state.videoBlocked;   // cues return whenever the hero is stopped or blocked
     // volume winds the system up: about 4x between a whisper and full
     const speedMul = 1 / (0.5 + vol * 1.5);
     const dur = s => (parseFloat(s) * speedMul).toFixed(2) + 's';
@@ -1351,6 +1411,11 @@ class Component extends DCLogic {
           }, this.state.videoMode ? 900 : 1600);
         }
         if (e) { if (e.stopPropagation) e.stopPropagation(); if (e.preventDefault) e.preventDefault(); }
+        // pointerdown + click can both land in one press; state.playing is async,
+        // so a second entry would read a stale value and stop what it just started
+        if (this.toggling) return;
+        this.toggling = true;
+        setTimeout(() => { this.toggling = false; }, 320);
         const au = this.trackRef && this.trackRef.current;
         const el = this.els()[this.state.slot];
         // first press also unlocks iOS playback — must stay inside the gesture
