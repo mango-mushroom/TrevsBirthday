@@ -77,10 +77,10 @@
     [data-dial]:hover svg circle:not([data-body]) { stroke-width: 1.7; stroke: rgba(255,255,255,.72); stroke-dashoffset: -54; }
     [data-dial]:hover svg use { stroke: rgba(255,255,255,.5); stroke-dashoffset: 38; }
     [data-dial]:hover svg line { stroke: rgba(255,255,255,.5); }
-    @keyframes cueDriftL { 0%, 100% { transform: translateY(-50%) translateX(-5px); } 50% { transform: translateY(-50%) translateX(5px); } }
-    @keyframes cueDriftR { 0%, 100% { transform: translateY(-50%) translateX(5px); } 50% { transform: translateY(-50%) translateX(-5px); } }
-    @keyframes wordThrobA { 0%, 100% { opacity: .5; transform: translateX(-5px) scale(1); } 50% { opacity: 1; transform: translateX(5px) scale(1.1); } }
-    @keyframes wordThrobB { 0%, 100% { opacity: .5; transform: translateX(5px) scale(1); } 50% { opacity: 1; transform: translateX(-5px) scale(1.12); } }
+    @keyframes cueDriftL { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(-10px); } }
+    @keyframes cueDriftR { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(10px); } }
+    @keyframes wordThrobA { 0%, 100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+    @keyframes wordThrobB { 0%, 100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.12); } }
     @keyframes discBreatheA {
       0%, 100% { stroke-width: 1.1; opacity: .5; }
       32%      { stroke-width: 2.7; opacity: 1; }
@@ -1034,7 +1034,7 @@ class Component extends DCLogic {
   // Muted inline video needs no gesture on iOS or desktop, so the reel can roll
   // on its own. The button is only ever needed to bring in SOUND.
   autoStart() {
-    if (this.autoStarted || this.state.everPressed) return this.startCarousel();
+    if (this.autoStarted) return this.startCarousel();
     this.autoStarted = true;
     this.setState({ videoMode: true, playing: true });
     this.goClip(0, true);
@@ -1247,8 +1247,9 @@ class Component extends DCLogic {
     const dip = this.state.dipping;
     const launching = this.state.launch;
     const muted = vol < 0.02;
-    const pressed = !!this.state.everPressed;   // has anyone asked for sound yet?
-    const live = playing && pressed;             // "running" for UI purposes means sound is on
+    // everPressed is restored from localStorage, so it can never mean "this
+    // session" — soundOn is set only when the track actually starts playing.
+    const live = !!this.state.soundOn;   // the button governs sound only
     const dialOn = !live || !!this.state.dialShown;
     const cueOn = !live || this.state.videoBlocked;   // cues stay up until sound starts
     // volume winds the system up: about 4x between a whisper and full
@@ -1359,12 +1360,12 @@ class Component extends DCLogic {
       },
       // bounded on BOTH sides: left holds a guaranteed margin off the screen edge,
       // right stops it short of the dial, and the content aligns toward the dial
-      cueLeft: 'position:absolute;z-index:7;top:50%;left:var(--space-4);right:calc(50% + min(19vw,95px) + 34px);white-space:nowrap;pointer-events:none;' +
+      cueLeft: 'position:absolute;z-index:7;top:50%;left:var(--space-4);right:calc(50% + min(19vw,95px) + 40px);white-space:nowrap;pointer-events:none;' +
         "font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(12px, calc((min(100vw, 560px) - 210px) / 9.4), 23px);" +
         'letter-spacing:.04em;text-transform:uppercase;color:#fff;display:flex;align-items:center;justify-content:flex-end;gap:clamp(15px,3.4vw,24px);' +
         'text-shadow:0 1px 5px rgba(18,17,16,.9), 0 0 16px rgba(255,255,255,.3);transition:opacity .5s ease;' +
         'animation:cueDriftL 2.3s cubic-bezier(.45,0,.55,1) infinite;opacity:' + (cueOn ? 1 : 0),
-      cueRight: 'position:absolute;z-index:7;top:50%;right:var(--space-4);left:calc(50% + min(19vw,95px) + 34px);white-space:nowrap;pointer-events:none;' +
+      cueRight: 'position:absolute;z-index:7;top:50%;right:var(--space-4);left:calc(50% + min(19vw,95px) + 40px);white-space:nowrap;pointer-events:none;' +
         "font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:clamp(12px, calc((min(100vw, 560px) - 210px) / 9.4), 23px);" +
         'letter-spacing:.04em;text-transform:uppercase;color:#fff;display:flex;align-items:center;justify-content:flex-start;gap:clamp(15px,3.4vw,24px);' +
         'text-shadow:0 1px 5px rgba(18,17,16,.9), 0 0 16px rgba(255,255,255,.3);transition:opacity .5s ease;' +
@@ -1372,12 +1373,12 @@ class Component extends DCLogic {
       // a light sweeps across the word, then the arrows chase it inward
       cueWord: 'background-image:linear-gradient(100deg, rgba(255,255,255,0) 32%, rgba(255,255,255,.95) 50%, rgba(255,255,255,0) 68%);' +
         'background-size:240% 100%;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;' +
-        'display:inline-block;transform-origin:center;' +
+        'display:inline-block;transform-origin:right center;' +
         'animation:shimmer 3.4s cubic-bezier(.4,0,.6,1) infinite, wordThrobA 1.7s ease-in-out infinite',
       // Play's word runs on its own, slower cycle so the four never move in step
       cueWordB: 'background-image:linear-gradient(100deg, rgba(255,255,255,0) 32%, rgba(255,255,255,.95) 50%, rgba(255,255,255,0) 68%);' +
         'background-size:240% 100%;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;' +
-        'display:inline-block;transform-origin:center;' +
+        'display:inline-block;transform-origin:left center;' +
         'animation:shimmer 4.3s cubic-bezier(.4,0,.6,1) infinite, wordThrobB 2.5s ease-in-out infinite',
       cueArrow: 'display:inline-block;flex:none;font-size:clamp(19px,5.6vw,31px);line-height:1;' +
         'filter:drop-shadow(0 1px 3px rgba(18,17,16,.8));animation:arrowRun 0.95s ease-in-out infinite',
@@ -1439,7 +1440,7 @@ class Component extends DCLogic {
       btnSpin: 'position:absolute;inset:0;pointer-events:none;animation:spinCW 8s linear infinite' + discFade,
       btnSpinBack: 'position:absolute;inset:14%;pointer-events:none' + discFade +
         (this.state.arcTrackOn && !this.state.spring ? ';animation:none;transition:transform .85s cubic-bezier(.34,1.56,.44,1)' : ''),
-      dialResting: playing ? null : '',
+      dialResting: live ? null : '',
       springOn: this.state.spring ? '' : null,
       earthSpin: 'transform-origin:100px 100px;animation:orbitK ' + dur('19s') + ' linear infinite' +
         (launching ? ';animation-duration:1.6s' : ''),
@@ -1503,7 +1504,7 @@ class Component extends DCLogic {
       orbitC: 'position:absolute;inset:' + nest('5%') + ';pointer-events:none;' + spin('CW', '52s') + fade,
       isPlaying: live,
       isPaused: !live,
-      playLabel: playing ? 'Pause' : 'Play the roof',
+      playLabel: live ? 'Pause' : 'Play the roof',
       swallow: e => { if (e && e.stopPropagation) e.stopPropagation(); },
 
       togglePlay: e => {
@@ -1534,7 +1535,7 @@ class Component extends DCLogic {
         const au = this.trackRef && this.trackRef.current;
         const el = this.els()[this.state.slot];
         // first press also unlocks iOS playback — must stay inside the gesture
-        if (!this.state.everPressed) {
+        if (!this.trackStarted) {
           const fresh = !this.state.videoMode;
           this.setState({ videoMode: true, playing: true, everPressed: true });
           this.everPlayed = true;
@@ -1544,16 +1545,16 @@ class Component extends DCLogic {
           this.startTrack();   // owns play() and the fade-in
           return;
         }
-        if (this.state.playing) {
-          this.els().forEach(x => { if (x) x.pause(); });
+        // The button is the MUSIC control: the reel autoplays and keeps rolling
+        // either way, so killing the sound must not kill the picture.
+        if (this.state.soundOn) {
           if (au) au.pause();
-          this.setState({ playing: false });
+          this.setState({ soundOn: false });
         } else {
-          if (el) { const p = el.play(); if (p && p.catch) p.catch(() => {}); }
           if (au) { au.muted = false; au.volume = this.state.vol; const p = au.play(); if (p && p.catch) p.catch(() => {}); }
-          this.lastAdvance = performance.now();
-          this.setState({ playing: true });
+          this.setState({ soundOn: true });
         }
+        if (!el || !el.getAttribute('src')) this.goClip(this.state.i || 0, true);   // the reel should never sit dead
       },
 
       // the outer orbit is the volume dial: angle from centre sets level
