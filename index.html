@@ -902,6 +902,7 @@ class Component extends DCLogic {
       this.resumes = 0;
       this.liveEl = el;            // now it is genuinely the one on screen
       this.pendingEl = null;
+      el.autoplay = true; el.setAttribute('autoplay','');   // iOS trusts this more than play()
       // Assigning currentTime drops readyState to 1 and starts a seek; a play()
       // issued into that seek is aborted and the element reverts to paused.
       // Only seek when actually off-mark.
@@ -933,6 +934,9 @@ class Component extends DCLogic {
     const swap = () => {
       const waited = performance.now() - t0;
       if (el.readyState >= 3 || this.buffered(el, clip.start || 0) >= 1.2 || waited >= 9000) return start();
+      if (waited > 1200 && el.readyState < 1 && el.paused) {
+        const k = el.play(); if (k && k.catch) k.catch(() => {});   // nothing is loading; force the fetch
+      }
       this.lastAdvance = performance.now();
       this.waitTimer = setTimeout(swap, 180);
     };
@@ -1540,7 +1544,17 @@ class Component extends DCLogic {
           this.setState({ videoMode: true, playing: true, everPressed: true });
           this.everPlayed = true;
           try { if (this.userGesture) localStorage.setItem(this.key + ':pressed-v3', '1'); } catch (err) {}
-          if (fresh) this.goClip(0, true);   // already rolling if it autostarted
+          // This press is the only gesture iOS will give us — spend it on the
+          // picture as well as the sound, or a blocked autoplay never recovers.
+          if (fresh) this.goClip(0, true);
+          else {
+            const v = this.liveEl || el;
+            if (v && !v.getAttribute('src')) this.goClip(this.state.i || 0, true);
+            else if (v && v.paused) {
+              v.muted = true; v.playsInline = true;
+              const pv = v.play(); if (pv && pv.catch) pv.catch(() => {});
+            }
+          }
           if (au) au.muted = false;
           this.startTrack();   // owns play() and the fade-in
           return;
@@ -1555,6 +1569,10 @@ class Component extends DCLogic {
           this.setState({ soundOn: true });
         }
         if (!el || !el.getAttribute('src')) this.goClip(this.state.i || 0, true);   // the reel should never sit dead
+        else if (el.paused) {                    // autoplay was blocked: this gesture revives it
+          el.muted = true; el.playsInline = true;
+          const pv = el.play(); if (pv && pv.catch) pv.catch(() => {});
+        }
       },
 
       // the outer orbit is the volume dial: angle from centre sets level
