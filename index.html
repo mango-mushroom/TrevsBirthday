@@ -29,6 +29,12 @@
   <style>
     html { overflow-x: hidden; }
     body { margin: 0; background: var(--color-neutral-900); -webkit-tap-highlight-color: transparent; }
+    @media (min-width: 1120px) {
+      [data-splash-root] { zoom: 1.5; }
+      [data-splash-layer], [data-cta-bar] { zoom: 0.6666667; }
+      [data-splash-inner], [data-cta-inner] { zoom: 1.5; }
+      [data-hero-stage] { height: calc(100dvh / 1.5) !important; min-height: 0 !important; max-height: none !important; }
+    }
     a { color: var(--color-accent-400); }
     a:hover { color: var(--color-accent-300); }
     /* the system's states paint the base red — peach everywhere instead */
@@ -166,9 +172,9 @@
 <div data-splash-root="" style="max-width:560px;margin:0 auto;background:var(--color-bg);overflow:hidden;position:relative;box-shadow:0 0 60px rgba(0,0,0,.45)">
 
   <sc-if value="{{ splashOn }}" hint-placeholder-val="{{ true }}">
-    <div data-no-wiggle="" style="{{ splashStyle }}">
+    <div data-splash-layer="" data-no-wiggle="" style="{{ splashStyle }}">
       <div data-splash-bg="" style="position:absolute;inset:0;overflow:hidden;background:#1d1a18"><img src="assets/splash-sunset.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 42%;animation:panArc 19s linear infinite alternate"></div>
-      <div style="position:relative;width:100%;max-width:560px;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-6)">
+      <div data-splash-inner="" style="position:relative;width:100%;max-width:560px;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-6)">
         <div style="display:flex;justify-content:center;align-items:center;width:100%;font-family:'Rubik Spray Paint',sans-serif;font-weight:400;font-size:calc((min(100vw, 560px) - 40px)/15.2);letter-spacing:.005em;white-space:nowrap;text-transform:uppercase;color:#fff;text-shadow:0 0 1px rgba(18,17,16,.9), 0 1px 2px rgba(18,17,16,.9);-webkit-text-stroke:0.6px rgba(18,17,16,.95);paint-order:stroke fill">
           <span style="color:var(--color-accent-400);flex:none">/</span>
           <span style="flex:1;text-align:center">{{ pctLabel }}</span>
@@ -208,14 +214,14 @@
     </div>
   </sc-if>
 
-  <div data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
+  <div data-hero-stage="" data-no-wiggle="" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}" onClick="{{ next }}" style="position:relative;height:100dvh;min-height:520px;max-height:780px;overflow:hidden;background:var(--color-neutral-900);cursor:pointer;touch-action:pan-y">
     <div ref="{{ stackRef }}" data-no-wiggle="" style="position:absolute;inset:-6% -4%;will-change:transform">
       <div style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#20211f"><img src="assets/hero-still-v2.jpg" alt="The roof deck at sunset over North Beach and the bay" style="width:100%;height:100%;object-fit:cover;animation:panArc 19s linear infinite alternate"></div>
       <div style="{{ layerA }}"><video ref="{{ heroRef }}" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="width:100%;height:100%;object-fit:cover;will-change:transform;backface-visibility:hidden"></video></div>
       <div style="{{ layerB }}"><video ref="{{ heroRefB }}" muted="{{ true }}" loop="{{ false }}" playsInline="{{ true }}" preload="auto" disablePictureInPicture="{{ true }}" controls="{{ false }}" style="width:100%;height:100%;object-fit:cover;will-change:transform;backface-visibility:hidden"></video></div>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #FAF9F500, #FAF9F500, #FAF9F500, #FAF9F500); pointer-events: none"></div>
-    <audio ref="{{ trackRef }}" src="assets/party-track.mp3" loop="{{ true }}" preload="auto"></audio>
+    <audio ref="{{ trackRef }}" src="assets/party-track-loop.mp3" loop="{{ true }}" preload="none"></audio>
     <div data-dial="" onPointerOver="{{ showDial }}" onPointerOut="{{ restDial }}" style="{{ deckStyle }}">
       <span style="{{ cueLeft }}"><span style="{{ cueWord }}">Push</span>
         <svg viewBox="0 0 44 14" aria-hidden="true" style="{{ cueArrow }}">
@@ -544,8 +550,8 @@
   </div>
 
 
-  <div ref="{{ barRef }}" data-no-wiggle="" style="position:fixed;left:0;right:0;bottom:0;z-index:20;transform:translateY(140%);transition:transform .55s cubic-bezier(.22,.7,.2,1);will-change:transform">
-    <div style="max-width:560px;margin:0 auto;display:flex;align-items:center;gap:var(--space-3);padding:10px var(--space-4) calc(10px + env(safe-area-inset-bottom));background:var(--color-neutral-900);color:var(--color-bg)">
+  <div ref="{{ barRef }}" data-cta-bar="" data-no-wiggle="" style="position:fixed;left:0;right:0;bottom:0;z-index:20;transform:translateY(140%);transition:transform .55s cubic-bezier(.22,.7,.2,1);will-change:transform">
+    <div data-cta-inner="" style="max-width:560px;margin:0 auto;display:flex;align-items:center;gap:var(--space-3);padding:10px var(--space-4) calc(10px + env(safe-area-inset-bottom));background:var(--color-neutral-900);color:var(--color-bg)">
       <div style="flex:1;min-width:0">
         <p style="margin:0;font-family:'Bungee',sans-serif;font-size:10px;letter-spacing:.06em;text-transform:uppercase">Oct 9 · 1 PM</p>
         <p style="margin:1px 0 0;font-size:11.5px;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ barLine }}</p>
@@ -794,11 +800,39 @@ class Component extends DCLogic {
   }
 
   advance() {
+    if (this.handover) return;                                      // one already in flight
     if (performance.now() - (this.lastAdvance || 0) < 900) return;  // never two handovers in a row
+    if (this.lite) {                                   // one clip, looped — no second download
+      const el = this.els()[this.state.slot];
+      if (!el) return;
+      this.lastAdvance = performance.now();
+      try { el.currentTime = (PARTY.clips[this.state.i] || {}).start || 0; } catch (e) {}
+      const p = el.play(); if (p && p.catch) p.catch(() => {});
+      return;
+    }
     this.goClip((this.state.i + 1) % PARTY.clips.length);
   }
 
   els() { return [this.heroRef.current, this.heroRefB.current]; }
+
+  // seconds of contiguous data already downloaded ahead of t
+  buffered(el, t) {
+    try {
+      const b = el.buffered;
+      for (let k = 0; k < b.length; k++) if (b.start(k) <= t + 0.12 && b.end(k) > t) return b.end(k) - t;
+    } catch (e) {}
+    return 0;
+  }
+
+  // a thin connection cannot feed a six-clip reel: loop the lightest clip instead
+  get lite() {
+    if (this._lite != null) return this._lite;
+    const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+    this._lite = c.saveData === true
+      || ['slow-2g', '2g'].indexOf(c.effectiveType) > -1
+      || (typeof c.downlink === 'number' && c.downlink > 0 && c.downlink < 1.6);
+    return this._lite;
+  }
 
   prep(el, clip) {
     if (!el || !clip) return;
@@ -810,7 +844,7 @@ class Component extends DCLogic {
     if (!el.dataset.guard) {
       el.dataset.guard = '1';
       el.addEventListener('playing', () => {
-        if (this.els()[this.state.slot] === el) return;   // this one is on screen
+        if (this.els()[this.state.slot] === el || el.dataset.incoming) return;   // on screen, or still filling
         el.pause();
         const c = PARTY.clips[this.state.i] || {};
         try { el.currentTime = c.start || 0; } catch (e) {}
@@ -827,24 +861,50 @@ class Component extends DCLogic {
     const to = gesture ? 0 : 1 - this.state.slot;
     const el = els[to];
     this.lastAdvance = performance.now();
+    clearTimeout(this.waitTimer);
+    this.handover = true;          // a handover is exclusive: nothing else may advance
+    el.dataset.incoming = '1';
     this.prep(el, clip);
     try { el.currentTime = clip.start || 0; } catch (e) {}
-    el.style.animation = 'none';
-    void el.offsetWidth;
-    el.style.objectPosition = '50% 50%';
-    el.style.animation = clip.pan ? 'panX ' + (clip.secs || (isFinite(el.duration) && el.duration) || 6).toFixed(1) + 's cubic-bezier(.33,0,.67,1) both' : 'none';
-    const p = el.play();
-    if (p && p.then) p.then(() => {
-      if (Math.abs(el.currentTime - (clip.start || 0)) > 0.4) { try { el.currentTime = clip.start || 0; } catch (e) {} }
-      this.setState({ videoBlocked: false });
-    }).catch(() => this.setState({ videoBlocked: true }));
-    this.setState({ i: n, slot: to });
-    // rest the outgoing element once the fade is done, and queue the next clip on it
-    clearTimeout(this.restTimer);
-    this.restTimer = setTimeout(() => {
-      const other = this.els()[1 - to];
-      if (other) { other.pause(); this.prep(other, PARTY.clips[(n + 1) % PARTY.clips.length]); }
-    }, 1100);
+
+    // Swapping on schedule is what freezes the reel on cellular: the incoming
+    // element gets shown with nothing downloaded. Keep the outgoing clip on
+    // screen and only cut when the next one can actually play through a second.
+    const t0 = performance.now();
+    const swap = () => {
+      const waited = performance.now() - t0;
+      const ready = el.readyState >= 3 || this.buffered(el, clip.start || 0) >= 1.2;
+      if (!ready && waited < 9000) {
+        // some builds of iOS will not fill a paused element: nudge it
+        if (waited > 2200 && el.paused) { const k = el.play(); if (k && k.catch) k.catch(() => {}); }
+        this.lastAdvance = performance.now();
+        this.waitTimer = setTimeout(swap, 180);
+        return;
+      }
+      this.handover = false;
+      delete el.dataset.incoming;
+      try { el.currentTime = clip.start || 0; } catch (e) {}
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.objectPosition = '50% 50%';
+      el.style.animation = clip.pan ? 'panX ' + (clip.secs || (isFinite(el.duration) && el.duration) || 6).toFixed(1) + 's cubic-bezier(.33,0,.67,1) both' : 'none';
+      const p = el.play();
+      if (p && p.then) p.then(() => {
+        if (Math.abs(el.currentTime - (clip.start || 0)) > 0.4) { try { el.currentTime = clip.start || 0; } catch (e) {} }
+        this.setState({ videoBlocked: false });
+      }).catch(() => this.setState({ videoBlocked: true }));
+      this.lastAdvance = performance.now();
+      this.queuedFor = null;
+      this.setState({ i: n, slot: to });
+      // rest the outgoing element once the fade is done; the next clip is not
+      // fetched here — the ticker queues it when this one is fed
+      clearTimeout(this.restTimer);
+      this.restTimer = setTimeout(() => {
+        const other = this.els()[1 - to];
+        if (other) other.pause();
+      }, 1100);
+    };
+    swap();
   }
 
   startTrack() {
@@ -854,19 +914,26 @@ class Component extends DCLogic {
     if (!a.paused) { this.trackStarted = true; return; }   // already running: never stack a second play()
     this.trackStarted = true;
     a.volume = 0;
-    const seekIn = () => { try { if (a.seekable.length && a.seekable.end(0) > 45) a.currentTime = 42; } catch (e) {} };
-    if (a.readyState < 1) a.addEventListener('loadedmetadata', seekIn, { once: true });
-    else seekIn();
-    const p = a.play();
-    if (p && p.then) p.then(() => this.setState({ soundOn: true })).catch(() => { this.trackStarted = false; });
-    else if (p && p.catch) p.catch(() => { this.trackStarted = false; });
-    // fade up rather than slamming in
-    const target = Math.max(0.02, this.state.vol ?? 0.9);
-    const fade = this.volFade = setInterval(() => {
-      if (!a || a.paused || this.dialing) return clearInterval(fade);   // a drag wins over the fade
-      a.volume = Math.min(target, a.volume + target / 28);
-      if (a.volume >= target - 0.01) clearInterval(fade);
-    }, 45);
+    // The track is the heaviest asset on the page. Let the visible clip take
+    // the pipe first, or the two starve each other and both stutter.
+    const t0 = performance.now();
+    const go = () => {
+      const el = this.els()[this.state.slot];
+      const fed = !el || this.buffered(el, el.currentTime || 0) > 2.5 || performance.now() - t0 > 4500;
+      if (!fed) { this.trackWait = setTimeout(go, 250); return; }
+      // the file is already trimmed to the loop window — no seek needed
+      const p = a.play();
+      if (p && p.then) p.then(() => this.setState({ soundOn: true })).catch(() => { this.trackStarted = false; });
+      else if (p && p.catch) p.catch(() => { this.trackStarted = false; });
+      // fade up rather than slamming in
+      const target = Math.max(0.02, this.state.vol ?? 0.9);
+      const fade = this.volFade = setInterval(() => {
+        if (!a || a.paused || this.dialing) return clearInterval(fade);   // a drag wins over the fade
+        a.volume = Math.min(target, a.volume + target / 28);
+        if (a.volume >= target - 0.01) clearInterval(fade);
+      }, 45);
+    };
+    go();
   }
 
   startCarousel() {
@@ -880,18 +947,37 @@ class Component extends DCLogic {
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       if (!this.state.videoMode || !this.state.playing) return;
+      if (this.handover) return;                    // waiting on the next clip's buffer
       const el = this.els()[this.state.slot];
       if (!el) return;
       const clip = PARTY.clips[this.state.i] || {};
       const held = performance.now() - (this.lastAdvance || 0);
-      if (clip.secs && el.currentTime - (clip.start || 0) >= clip.secs) this.advance();
-      else if (!clip.secs && isFinite(el.duration) && el.duration && el.duration - el.currentTime <= 1.0 && held > 1500) this.advance();
+      const t = el.currentTime;
+      const moved = Math.abs(t - (this.lastT || 0)) > 0.02;
+      this.lastT = t;
+      this.stuck = (!moved && !el.paused) ? (this.stuck || 0) + 1 : 0;
+      const ahead = this.buffered(el, t);
+
+      // Fetch the next clip only once this one is fed — two clips downloading
+      // at once is why the reel stalls on a phone.
+      if (!this.lite && this.queuedFor !== this.state.i
+          && (ahead > 3 || (isFinite(el.duration) && el.duration && el.duration - t < 3))) {
+        this.queuedFor = this.state.i;
+        const other = this.els()[1 - this.state.slot];
+        if (other) this.prep(other, PARTY.clips[(this.state.i + 1) % PARTY.clips.length]);
+      }
+
+      if (clip.secs && t - (clip.start || 0) >= clip.secs) this.advance();
+      else if (!clip.secs && isFinite(el.duration) && el.duration && el.duration - t <= 1.0 && held > 1500) this.advance();
       else if (el.paused && held > 3500) this.advance();
-      else if (isFinite(el.duration) && el.duration && held > el.duration * 1000 + 3000) this.advance();
+      // a frozen picture is a refill, not a cue to skip: only move on if it has
+      // been stuck ~6s with nothing arriving
+      else if (this.stuck > 60 && ahead < 0.3 && held > 6000) this.advance();
     }, 100);
   }
 
   componentWillUnmount() {
+    clearTimeout(this.waitTimer); clearTimeout(this.trackWait); this.handover = false;
     clearInterval(this.timer);
     clearTimeout(this.fallback);
     clearInterval(this.tallyTimer);
